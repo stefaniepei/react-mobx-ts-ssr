@@ -1,11 +1,15 @@
 {
   "presets": [
-    "react",
-    "es2015",
-    "stage-0"
+    "env"
   ],
   "plugins": [
-    "transform-runtime",
-    "transform-decorators-legacy"
+    ["transform-runtime", {
+      "helpers": true,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }],
+    "transform-decorators-legacy",
+    "babel-plugin-transform-object-assign"
   ]
 }

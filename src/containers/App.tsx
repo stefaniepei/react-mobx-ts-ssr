@@ -11,7 +11,7 @@ import DevTools from 'mobx-react-devtools'
 import HomeRouters from '../containers/Home/router'
 
 // 统一路由方法
-import Router from '../routers/router'
+import Routers from '../routers/routers'
 
 class App extends React.Component<any, any> {
   constructor(props: any) {
@@ -22,11 +22,11 @@ class App extends React.Component<any, any> {
     const devToolsNode = process.env.NODE_ENV === 'production'
       ? null
       : <DevTools />
-    const routers = [...HomeRouters]
+    const routes = [...HomeRouters]
     return (
-      <Router routes={routers}>
+      <Routers routes={routes}>
         {devToolsNode}
-      </Router>
+      </Routers>
     )
   }
 }

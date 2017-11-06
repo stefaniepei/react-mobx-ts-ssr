@@ -1,11 +1,11 @@
-import * as WebpackDevMiddleware from 'webpack-dev-middleware'
-import * as path from 'path'
+import WebpackDevMiddleware from 'webpack-dev-middleware'
+import path from 'path'
 import _debug from 'debug'
 import configs from '../../configs'
 
 const debug = _debug('app:server:webpack-dev');
 
-export default function(compiler: any, publicPath: any) {
+export default function(compiler, publicPath) {
   debug('Enable webpack dev middleware.');
 
   const middleware = WebpackDevMiddleware(compiler, {
@@ -18,9 +18,9 @@ export default function(compiler: any, publicPath: any) {
     stats: false
   });
 
-  return async function koaWebpackDevMiddleware (ctx: any, next: any) {
+  return async function koaWebpackDevMiddleware (ctx, next) {
     let hasNext = await applyExpressMiddleware(middleware, ctx.req, {
-      end: (content: any) => (ctx.body = content),
+      end: (content) => (ctx.body = content),
       setHeader: function () {
         ctx.set.apply(ctx, arguments)
       }
@@ -32,7 +32,7 @@ export default function(compiler: any, publicPath: any) {
   }
 }
 
-function applyExpressMiddleware (fn: any, req: any, res: any) {
+function applyExpressMiddleware (fn, req, res) {
   const originalEnd = res.end;
 
   return new Promise((resolve) => {

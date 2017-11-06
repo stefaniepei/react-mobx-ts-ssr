@@ -5,6 +5,7 @@ export default {
   env: process.env.NODE_ENV || 'development',
   render: process.env.RENDER_TYPE || 'client',
   pathBase: path.join(__dirname, '..'),
+  pathSrc: path.join(__dirname, '../src'),
   port: 4000,
   compilerVendor: [
     'react',

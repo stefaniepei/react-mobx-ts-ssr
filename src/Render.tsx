@@ -2,8 +2,8 @@ import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 
-import Provider from './Provider'
 import configs from '../configs'
+import Provider from './Provider'
 
 const render = (Component) => {
   configs.render === 'server' ?

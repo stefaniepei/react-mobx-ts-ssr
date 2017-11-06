@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'mobx-react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 // import createStore from './store/createStore'
-// import App from './containers/App'
+import App from './containers/App'
 
 useStrict(true) // MobX strict mode
 
@@ -22,7 +22,7 @@ const browserHistory = createBrowserHistory()
 function Provider() {
   return (
     <MobxProvider>
-      <div>1</div>
+      <App />
     </MobxProvider>
   )
 }
