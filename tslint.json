@@ -1,0 +1,91 @@
+{
+  "defaultSeverity": "error",
+  "rulesDirectory": "./src",
+  "extends": [
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {},
+  "rules": {
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "linebreak-style": [
+      true,
+      "LF"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-single"
+    ],
+    "no-console": false,
+    "no-debugger": true,
+    "ban": true,
+    "no-var-keyword": true,
+    "switch-default": true,
+    "no-eval": true,
+    "no-magic-numbers": true,
+    "no-unused-variable": true,
+    "no-trailing-whitespace": [
+      true,
+      "ignore-comments",
+      "ignore-jsdoc",
+      "ignore-template-strings"
+    ],
+    "space-before-function-paren": [
+      true,
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "never",
+        "method": "never",
+        "constructor": "never"
+      }
+    ],
+    "import-spacing": true,
+    "no-irregular-whitespace": true,
+    "space-within-parens": [
+      true,
+      0
+    ],
+    "ter-arrow-spacing": [
+      true
+    ],
+    "block-spacing": [
+      true,
+      "always"
+    ],
+    "space-in-parens": [
+      true,
+      "never"
+    ],
+    "object-curly-spacing": [
+      true,
+      "always"
+    ],
+    "arrow-return-shorthand": true,
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ]
+  }
+}

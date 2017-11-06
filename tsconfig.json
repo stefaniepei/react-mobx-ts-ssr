@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "allowJs": true,
+      "lib": ["es2015", "es5", "dom"],
+      "jsx": "react",
+      "sourceMap": true,
+      "rootDir": "./",
+      "outDir": "./dist",
+      "moduleResolution": "node",
+      "preserveConstEnums": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": "./",
+      "paths": {
+        "g-common/*": ["./common/*"],
+        "g-common": ["./common"],
+        "g-components/*": ["./components/*"],
+        "g-components": ["./components"],
+        "g-containers/*": ["./containers/*"],
+        "g-containers": ["./containers"],
+        "g-store/*": ["./store/*"],
+        "g-store": ["./store"],
+        "g-src/*": ["./*"],
+        "g-src": ["./"]
+      }
+  },
+  "include": [
+      "./src/**/*.ts",
+      "./src/**/*.tsx",
+      "./typings/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "./src/Render.js",
+    "./src/Provider.js"
+  ]
+}

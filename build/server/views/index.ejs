@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server Side Rendering Test</title>
+    <script type="text/javascript">
+      var __INITIAL_STATE__ = <%- JSON.stringify(initialState).replace(/</g, '\\u003c') %>;
+    </script>
+  </head>
+  <body>
+    <div id="app"><%- initialView %></div>
+    <script type="text/javascript" src="dist/main.js"></script>
+  </body>
+</html>
