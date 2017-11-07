@@ -46,11 +46,11 @@ const config = {
     ]
   },
   plugins: [
-    // new webpack.DefinePlugin(Object.assign({
-    //   'process.env': { NODE_ENV: JSON.stringify(configs.env) },
-    //   __DEV__,
-    //   __PROD__,
-    // })),
+    new webpack.DefinePlugin(Object.assign({
+      'process.env': { NODE_ENV: JSON.stringify(configs.env) },
+      __DEV__,
+      __PROD__,
+    })),
     new CheckerPlugin(),
     new HtmlWebpackPlugin({
       template: inProjectSrc('src/index.html'),
@@ -73,12 +73,12 @@ config.module.rules.push({
   }
 })
 
-// config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
-//   excludeWarnings: true
-// }))
-// config.plugins.push(new ForkTsCheckerWebpackPlugin({
-//   checkSyntacticErrors: true
-// }))
+config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
+  excludeWarnings: true
+}))
+config.plugins.push(new ForkTsCheckerWebpackPlugin({
+  checkSyntacticErrors: true
+}))
 
 // config.module.rules.push({
 //   test: /\.(js|jsx)$/,
@@ -130,15 +130,15 @@ config.module.rules.push({
   exclude: /node_modules/
 })
 
-// config.module.rules.push({
-//   test: /\.(scss|sass)$/,
-//   loader: ['style-loader', 'css-loader', 'sass-loader']
-// })
+config.module.rules.push({
+  test: /\.(scss|sass)$/,
+  loader: ['style-loader', 'css-loader', 'sass-loader']
+})
 
-// config.module.rules.push({
-//   test: /\.css$/,
-//   loader: ['style-loader', 'css-loader']
-// })
+config.module.rules.push({
+  test: /\.css$/,
+  loader: ['style-loader', 'css-loader']
+})
 
 
 

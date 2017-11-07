@@ -24,7 +24,7 @@ const render = (Component) => {
 render(Provider)
 
 if ((module as any).hot && configs.render !== 'server') {
-  module.hot.accept('./Provider', () => {
+  (module as any).hot.accept('./Provider', () => {
     render(Provider)
   })
 }

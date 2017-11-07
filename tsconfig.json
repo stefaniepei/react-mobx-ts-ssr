@@ -4,6 +4,10 @@
       "module": "commonjs",
       "allowJs": true,
       "lib": ["es2015", "es5", "dom"],
+      "types": ["node", "express"],
+      "typeRoots": [
+        "node_modules/@types"
+      ],
       "jsx": "react",
       "sourceMap": true,
       "rootDir": "./",
