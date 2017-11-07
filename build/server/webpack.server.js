@@ -1,11 +1,12 @@
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-
+import nodeExternals from 'webpack-node-externals'
 import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
+import _debug from 'debug'
 import configs from '../../configs/index'
 
 const inProject = path.resolve.bind(path, configs.pathBase)
@@ -15,23 +16,22 @@ const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
 
 const config = {
-  name: 'client',
-  target: 'web',
+  name: 'server',
+  target: 'node',
+  externals: [nodeExternals()],
   resolve: {
     modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
-  devtool: 'source-map',
   entry: {
     main: [
-      // 'babel-polyfill',
       inProjectSrc('src/Render.tsx')
     ]
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].js',
     path: inProjectSrc('dist'),
-    publicPath: configs.compilerPublicPath
+    libraryTarget: "commonjs2" // 支持其他js调用
   },
   module: {
     loaders: [
@@ -50,14 +50,8 @@ const config = {
       __PROD__,
     })),
     new CheckerPlugin(),
-    new HtmlWebpackPlugin({
-      template: inProjectSrc('src/index.html'),
-      hash: false,
-      inject: true,
-      manify: {
-        collapseWhitespace: true
-      }
-    })
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin()
   ]
 }
 config.module.rules.push({
@@ -77,49 +71,6 @@ config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
 config.plugins.push(new ForkTsCheckerWebpackPlugin({
   checkSyntacticErrors: true
 }))
-
-// config.module.rules.push({
-//   test: /\.(js|jsx)$/,
-//   exclude: /node_modules/,
-//   use: [{
-//     loader: 'babel-loader',
-//     query: {
-//       cacheDirectory: true,
-//       plugins: [
-//         'babel-plugin-transform-class-properties',
-//         'babel-plugin-syntax-dynamic-import',
-//         [
-//           'babel-plugin-transform-runtime',
-//           {
-//             helpers: true,
-//             polyfill: false, // we polyfill needed features in src/normalize.js
-//             regenerator: true,
-//           },
-//         ],
-//         "transform-runtime",
-//         [
-//           'babel-plugin-transform-object-rest-spread',
-//           {
-//             useBuiltIns: true // we polyfill Object.assign in src/normalize.js
-//           },
-//         ],
-//         "babel-plugin-transform-object-assign",
-//         ["babel-plugin-import", { libraryName: "antd", style: "css" }]
-//       ],
-//       presets: [
-//         'react', 'es2015', 'stage-0',
-//         'babel-preset-react',
-//         ['babel-preset-env', {
-//           modules: false,
-//           targets: {
-//             ie9: true,
-//           },
-//           uglify: true,
-//         }],
-//       ]
-//     },
-//   }],
-// })
 
 config.module.rules.push({
   test: /\.ts|tsx?$/,

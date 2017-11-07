@@ -22,8 +22,38 @@
     "lint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json --fix --format stylish"
   },
   "betterScripts": {
+    "start": {
+      "command": "babel-node build/client/index.js",
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "app:*"
+      }
+    },
+    "start:dist": {
+      "command": "babel-node build/client/index.js",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
+    "start:dist:server": {
+      "command": "ts-node build/server/index.js",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*",
+        "RENDER_TYPE": "server"
+      }
+    },
+    "server": {
+      "command": "npm run deploy:prod:server && babel-node build/server/index.js",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*",
+        "RENDER_TYPE": "server"
+      }
+    },
     "compile": {
-      "command": "babel-node build/scripts/compile.js",
+      "command": "babel-node build/compile.js",
       "env": {
         "DEBUG": "app:*"
       }
@@ -55,36 +85,6 @@
         "DEBUG": "app:*",
         "RENDER_TYPE": "server"
       }
-    },
-    "start": {
-      "command": "babel-node build/start.js",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "start:dist": {
-      "command": "ts-node build/start.ts",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
-      }
-    },
-    "start:dist:server": {
-      "command": "ts-node build/start.ts",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*",
-        "RENDER_TYPE": "server"
-      }
-    },
-    "server": {
-      "command": "npm run deploy:prod:server && ts-node build/start.ts",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*",
-        "RENDER_TYPE": "server"
-      }
     }
   },
   "author": "shienzone",
@@ -109,9 +109,13 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
+    "compression": "^1.7.1",
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "fork-ts-checker-notifier-webpack-plugin": "^0.2.0",
     "fork-ts-checker-webpack-plugin": "^0.2.8",
+    "fs-extra": "^4.0.2",
     "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
     "jasmine": "^2.8.0",
@@ -126,16 +130,19 @@
     "mobx-react": "^4.3.4",
     "mobx-react-devtools": "^4.2.15",
     "mobx-react-router": "^4.0.1",
+    "morgan": "^1.9.0",
     "object-assign": "^4.1.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-hot-loader": "^3.1.1",
     "react-immutable-render-mixin": "^0.9.7",
     "react-router-dom": "^4.2.2",
+    "rimraf": "^2.6.2",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
     "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.20.0"
+    "webpack-hot-middleware": "^2.20.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "better-npm-run": "^0.1.0",

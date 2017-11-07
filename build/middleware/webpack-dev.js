@@ -1,8 +1,7 @@
 import WebpackDevMiddleware from 'webpack-dev-middleware'
 import path from 'path'
-import _debug from 'debug'
 import configs from '../../configs'
-
+import _debug from 'debug'
 const debug = _debug('app:server:webpack-dev');
 
 export default function(compiler, publicPath) {

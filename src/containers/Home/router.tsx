@@ -15,7 +15,7 @@ const HomeRouters = [
     component: HomeIndex,
     exact: true,
     navOptions: {
-      label: 'Markdown Editor',
+      label: 'Home Page',
     },
   },
   {
@@ -23,7 +23,7 @@ const HomeRouters = [
     component: Login,
     exact: true,
     navOptions: {
-      label: 'Github User Search',
+      label: 'Login Page',
     },
   },
 ]

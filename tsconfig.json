@@ -19,21 +19,15 @@
       "allowSyntheticDefaultImports": true,
       "baseUrl": "./src",
       "paths": {
-        "g-common/*": ["./common/*"],
-        "g-common": ["./common"],
-        "g-components/*": ["./components/*"],
-        "g-components": ["./components"],
-        "g-containers/*": ["./containers/*"],
-        "g-containers": ["./containers"],
-        "g-store/*": ["./store/*"],
-        "g-store": ["./store"],
-        "g-src/*": ["./*"],
-        "g-src": ["./"]
+        "g-src/*": ["./src/*"],
+        "g-src": ["./src"]
       }
   },
   "include": [
       "./src/**/*.ts",
       "./src/**/*.tsx",
+      "./build/server/*.ts",
+      "./build/server/*.tsx",
       "./typings/**/*.d.ts"
   ],
   "exclude": [
