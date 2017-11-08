@@ -24,7 +24,8 @@ const render = (Component) => {
 render(Provider)
 
 if ((module as any).hot && configs.render !== 'server') {
-  (module as any).hot.accept('./Provider', () => {
-    render(Provider)
+  (module as any).hot.accept('./Provider.tsx', () => {
+    const containers = require('./Provider.tsx').default
+    render(containers)
   })
 }

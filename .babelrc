@@ -3,6 +3,7 @@
     "env","react"
   ],
   "plugins": [
+    // "react-hot-loader/babel",
     ["transform-runtime", {
       "helpers": true,
       "polyfill": false,

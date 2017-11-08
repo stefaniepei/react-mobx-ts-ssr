@@ -29,7 +29,7 @@ const compiler = webpack(webpackConfig);
 const { publicPath } = webpackConfig.output;
 
 app.use(webpackDevMiddleware(compiler, publicPath));
-// app.use(webpackHMRMiddleware(compiler));
+app.use(webpackHMRMiddleware(compiler));
 
 
 

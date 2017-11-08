@@ -23,7 +23,7 @@ class Home extends React.Component {
         <div>
           Home
         </div>
-        <button onClick={this.clickHandle}>点我</button>
+        <button onClick={this.clickHandle}>1111</button>
       </div>
     )
   }

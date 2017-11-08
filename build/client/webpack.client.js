@@ -26,6 +26,7 @@ const config = {
   devtool: 'source-map',
   entry: {
     main: [
+      'react-hot-loader/patch',
       inRootSrc('src/Render.tsx')
       // 'E:/shinezone-generator-reactts/build/client/index.js'
       // 'babel-polyfill',
@@ -52,6 +53,20 @@ const config = {
       __SSR__,
     })),
     new CheckerPlugin(),
+  ]
+}
+// Development Tools
+// ------------------------------------
+if (__DEV__) {
+  config.entry.main.push(
+    `webpack-hot-middleware/client.js?path=/__webpack_hmr&timeout=1000&reload=true`
+  )
+  config.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
+  )
+
+  config.plugins.push(
     new HtmlWebpackPlugin({
       template: inRootSrc('src/index.html'),
       hash: false,
@@ -60,7 +75,8 @@ const config = {
         collapseWhitespace: true
       }
     })
-  ]
+  )
+
 }
 
 config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
