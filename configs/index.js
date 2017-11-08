@@ -6,7 +6,8 @@ export default {
   render: process.env.RENDER_TYPE || 'client',
   pathBase: path.join(__dirname, '..'),
   pathSrc: path.join(__dirname, '../src'),
-  outDir:path.join(__dirname, '../dist'),
+  outDir: path.join(__dirname, '../dist'),
+  publicDir: path.join(__dirname, '../src/public'),
   port: 4000,
   compilerVendor: [
     'react',

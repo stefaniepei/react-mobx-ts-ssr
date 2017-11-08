@@ -3,17 +3,12 @@
   "version": "1.0.0",
   "description": "react16+react-router4+mobx+ssr",
   "scripts": {
+    "start": "better-npm-run start",
+    "start:server": "better-npm-run start:server",
     "clean": "rimraf dist",
     "compile": "better-npm-run compile",
-    "start": "better-npm-run start",
-    "start:dist": "better-npm-run start:dist",
-    "start:dist:server": "better-npm-run start:dist:server",
-    "build:dev:deploy": "better-npm-run build:dev:deploy",
     "deploy": "better-npm-run deploy",
-    "deploy:dev": "better-npm-run deploy:dev",
-    "deploy:prod": "better-npm-run deploy:prod",
-    "deploy:prod:server": "better-npm-run deploy:prod:server",
-    "server": "better-npm-run server",
+    "start:dist": "better-npm-run start:dist",
     "publish:setup": "./node_modules/.bin/pm2 deploy ecosystem.config.js development setup",
     "publish": "./node_modules/.bin/pm2 deploy ecosystem.config.js development",
     "test": "cross-env NODE_ENV=development karma start build/karma.conf.js",
@@ -29,61 +24,36 @@
         "DEBUG": "app:*"
       }
     },
-    "start:dist": {
-      "command": "babel-node build/client/index.js",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
-      }
-    },
-    "start:dist:server": {
+    "start:server": {
       "command": "ts-node build/server/index.js",
       "env": {
         "NODE_ENV": "production",
-        "DEBUG": "app:*",
-        "RENDER_TYPE": "server"
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
       }
     },
-    "server": {
-      "command": "npm run deploy:prod:server && babel-node build/server/index.js",
+    "start:dist": {
+      "command": "node dist/server.bundle.js",
       "env": {
         "NODE_ENV": "production",
-        "DEBUG": "app:*",
-        "RENDER_TYPE": "server"
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
       }
     },
     "compile": {
-      "command": "babel-node build/compile.js",
+      "command": "babel-node build/server/compile.js",
       "env": {
+        "NODE_ENV": "production",
+        "RENDER_TYPE": "server",
         "DEBUG": "app:*"
       }
     },
     "deploy": {
       "command": "npm run clean && npm run compile",
       "env": {
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy:dev": {
-      "command": "npm run deploy",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy:prod": {
-      "command": "npm run deploy",
-      "env": {
         "NODE_ENV": "production",
+        "RENDER_TYPE": "server",
         "DEBUG": "app:*"
-      }
-    },
-    "deploy:prod:server": {
-      "command": "npm run deploy",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*",
-        "RENDER_TYPE": "server"
       }
     }
   },

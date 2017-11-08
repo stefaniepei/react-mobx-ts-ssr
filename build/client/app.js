@@ -6,7 +6,7 @@ import webpack from 'webpack'
 import webpackConfig from './webpack.client'
 import historyApiFallback from 'koa-connect-history-api-fallback'
 import path from 'path'
-import fs from 'fs'
+import fs from 'fs-extra'
 import _debug from 'debug'
 import configs from '../../configs'
 import webpackDevMiddleware from '../middleware/webpack-dev'
@@ -37,6 +37,6 @@ app.use(webpackDevMiddleware(compiler, publicPath));
 // these files. This middleware doesn't need to be enabled outside
 // of development since this directory will be copied into ~/dist
 // when the application is compiled.
-app.use(convert(KoaStatic(path.join(__dirname, '..', '..', 'src', 'public'))));
+app.use(convert(KoaStatic(path.join(__dirname, '..', '..', 'public'))));
 
 export default app

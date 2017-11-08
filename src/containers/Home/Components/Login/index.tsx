@@ -19,12 +19,17 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className='page-container'>
+      <div className='page-container' style={{background:'blue'}}>
+        <div>
           Login
         </div>
+        <button onClick={this.clickHandle}>登录</button>
       </div>
     )
+  }
+
+  clickHandle(){
+    console.log('登录啦!!!!!')
   }
 }
 

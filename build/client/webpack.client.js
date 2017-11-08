@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import nodeExternals from 'webpack-node-externals'
 
 import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -8,11 +9,12 @@ import { CheckerPlugin } from 'awesome-typescript-loader'
 
 import configs from '../../configs/index'
 
-const inProject = path.resolve.bind(path, configs.pathBase)
-const inProjectSrc = (file) => inProject(configs.pathBase, file)
+const inRoot = path.resolve.bind(path, configs.pathBase)
+const inRootSrc = (file) => inRoot(configs.pathBase, file)
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
+const __SSR__ = process.env.RENDER_TYPE === 'server'
 
 const config = {
   name: 'client',
@@ -24,21 +26,20 @@ const config = {
   devtool: 'source-map',
   entry: {
     main: [
+      inRootSrc('src/Render.tsx')
+      // 'E:/shinezone-generator-reactts/build/client/index.js'
       // 'babel-polyfill',
-      inProjectSrc('src/Render.tsx')
+      // inRootSrc('src/Render.tsx') //run
+      // inRootSrc('build/client/index.js')  //build
     ]
   },
   output: {
-    filename: '[name].bundle.js',
-    path: inProjectSrc('dist'),
+    filename: 'client.bundle.js',
+    path: inRootSrc('dist'),
     publicPath: configs.compilerPublicPath
   },
   module: {
     loaders: [
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      }
     ],
     rules: [
     ]
@@ -48,10 +49,11 @@ const config = {
       'process.env': { NODE_ENV: JSON.stringify(configs.env) },
       __DEV__,
       __PROD__,
+      __SSR__,
     })),
     new CheckerPlugin(),
     new HtmlWebpackPlugin({
-      template: inProjectSrc('src/index.html'),
+      template: inRootSrc('src/index.html'),
       hash: false,
       inject: true,
       manify: {
@@ -60,6 +62,14 @@ const config = {
     })
   ]
 }
+
+config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
+  excludeWarnings: true
+}))
+config.plugins.push(new ForkTsCheckerWebpackPlugin({
+  checkSyntacticErrors: true
+}))
+
 config.module.rules.push({
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
@@ -70,56 +80,6 @@ config.module.rules.push({
     presets: ['es2015', 'react', 'stage-0']
   }
 })
-
-config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
-  excludeWarnings: true
-}))
-config.plugins.push(new ForkTsCheckerWebpackPlugin({
-  checkSyntacticErrors: true
-}))
-
-// config.module.rules.push({
-//   test: /\.(js|jsx)$/,
-//   exclude: /node_modules/,
-//   use: [{
-//     loader: 'babel-loader',
-//     query: {
-//       cacheDirectory: true,
-//       plugins: [
-//         'babel-plugin-transform-class-properties',
-//         'babel-plugin-syntax-dynamic-import',
-//         [
-//           'babel-plugin-transform-runtime',
-//           {
-//             helpers: true,
-//             polyfill: false, // we polyfill needed features in src/normalize.js
-//             regenerator: true,
-//           },
-//         ],
-//         "transform-runtime",
-//         [
-//           'babel-plugin-transform-object-rest-spread',
-//           {
-//             useBuiltIns: true // we polyfill Object.assign in src/normalize.js
-//           },
-//         ],
-//         "babel-plugin-transform-object-assign",
-//         ["babel-plugin-import", { libraryName: "antd", style: "css" }]
-//       ],
-//       presets: [
-//         'react', 'es2015', 'stage-0',
-//         'babel-preset-react',
-//         ['babel-preset-env', {
-//           modules: false,
-//           targets: {
-//             ie9: true,
-//           },
-//           uglify: true,
-//         }],
-//       ]
-//     },
-//   }],
-// })
 
 config.module.rules.push({
   test: /\.ts|tsx?$/,

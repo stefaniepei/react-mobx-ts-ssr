@@ -9,8 +9,8 @@ import { CheckerPlugin } from 'awesome-typescript-loader'
 import _debug from 'debug'
 import configs from '../../configs/index'
 
-const inProject = path.resolve.bind(path, configs.pathBase)
-const inProjectSrc = (file) => inProject(configs.pathBase, file)
+const inRoot = path.resolve.bind(path, configs.pathBase)
+const inRootSrc = (file) => inRoot(configs.pathBase, file)
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
@@ -25,35 +25,43 @@ const config = {
   },
   entry: {
     main: [
-      inProjectSrc('src/Render.tsx')
+      //inRootSrc('src/Render.tsx') //run
+      inRootSrc('build/server/index.js')  //build
     ]
   },
   output: {
-    filename: '[name].js',
-    path: inProjectSrc('dist'),
-    libraryTarget: "commonjs2" // 支持其他js调用
+    filename: 'server.bundle.js',
+    path: inRootSrc('dist'),
+    publicPath: configs.compilerPublicPath,
+    // libraryTarget: "commonjs2" // 支持其他js调用
   },
   module: {
     loaders: [
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      }
     ],
     rules: [
     ]
   },
   plugins: [
     new webpack.DefinePlugin(Object.assign({
-      'process.env': { NODE_ENV: JSON.stringify(configs.env) },
+      'process.env': { NODE_ENV: JSON.stringify(configs.env), RENDER_TYPE: JSON.stringify(configs.render)},
       __DEV__,
       __PROD__,
     })),
     new CheckerPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin()
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
+
+config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
+  excludeWarnings: true
+}))
+config.plugins.push(new ForkTsCheckerWebpackPlugin({
+  checkSyntacticErrors: true
+}))
+
+
+
+
 config.module.rules.push({
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
@@ -64,13 +72,6 @@ config.module.rules.push({
     presets: ['es2015', 'react', 'stage-0']
   }
 })
-
-config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
-  excludeWarnings: true
-}))
-config.plugins.push(new ForkTsCheckerWebpackPlugin({
-  checkSyntacticErrors: true
-}))
 
 config.module.rules.push({
   test: /\.ts|tsx?$/,

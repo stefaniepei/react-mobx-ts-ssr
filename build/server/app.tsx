@@ -4,9 +4,11 @@ import * as path from 'path'
 import * as React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
+import configs from '../../configs/index'
 
+const inRoot = path.resolve.bind(path, configs.pathBase)
+const inRootSrc = (file) => inRoot(configs.pathBase, file)
 import * as middleware from './middleware/index'
-
 import App from '../../src/containers/App'
 
 let app = express()
@@ -16,12 +18,10 @@ app.use(middleware.session)
 app.use(middleware.compression)
 
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', 'src')
 
-app.use(express.static(path.join(__dirname, '../../src/public')))
-app.use(express.static(path.resolve(__dirname, '../../dist')))
-
-console.log(path.resolve(__dirname, '../../dist'))
+// app.use(express.static('public'))
+app.use(express.static('dist'))
 
 app.get('*', (req, res) => {
   const context = {
