@@ -1,15 +1,20 @@
+/* tslint:disable no-unused-variable*/
 import * as React from 'react'
+import {observer, inject} from 'mobx-react'
 // import './index.less'
 
 /** 所有需用到的组件 **/
 
-interface Props {
-  actions: any,
+interface props {
+  Base: any
 }
 
-class Home extends React.Component {
+@inject('RouterStore')
+@inject('Base')
+@observer
+class Home extends React.Component<props,any> {
 
-  constructor(props: Props) {
+  constructor(props: props) {
     super(props)
   }
 
@@ -18,18 +23,22 @@ class Home extends React.Component {
   }
 
   render() {
+    const me = this
+    const {add,count} = this.props.Base
+    console.log(this)
     return (
       <div className='page-container' style={{background:'red'}}>
         <div>
-          Home
+          Home {count}
         </div>
-        <button onClick={this.clickHandle}>1111</button>
+        <button onClick={add}>+1</button>
+        <button onClick={this.addTest}>Test</button>
       </div>
     )
   }
 
-  clickHandle(){
-    console.log('点中啦!!!!!')
+  addTest(){
+    console.log('假的+1操作!')
   }
 }
 

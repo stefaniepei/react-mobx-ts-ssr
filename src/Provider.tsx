@@ -2,29 +2,29 @@
 import * as React from 'react'
 import { useStrict } from 'mobx'
 import { Provider as MobxProvider } from 'mobx-react'
-import { syncHistoryWithStore } from 'mobx-react-router'
-// import createBrowserHistory from 'history/createBrowserHistory'
+import { syncHistoryWithStore,RouterStore  } from 'mobx-react-router'
+import createMemoryHistory from 'history/createMemoryHistory'
 
-// import createStore from './store/createStore'
+import createStore from './store/createStore'
 import App from './containers/App'
 
 useStrict(true) // MobX strict mode
 
-// const browserHistory = createBrowserHistory()
+const memoryHistory = createMemoryHistory()
+const routingStore = new RouterStore()
+export const stores = createStore()
 
-// const stores = createStore()
 
-// const history = syncHistoryWithStore(
-//   browserHistory,
-//   stores.RouterStore
-// )
+export const history = syncHistoryWithStore(
+  memoryHistory,
+  routingStore,
+  ...stores
+)
 
-function Provider() {
+export default function Provider() {
   return (
-    <MobxProvider>
-      <App />
+    <MobxProvider {...stores}>
+      <App history={history} />
     </MobxProvider>
   )
 }
-
-export default Provider

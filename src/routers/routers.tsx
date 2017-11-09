@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 
 function Routers({
+  history,
   routes,
   children,
 }) {

@@ -9,7 +9,13 @@ import configs from '../../configs/index'
 const inRoot = path.resolve.bind(path, configs.pathBase)
 const inRootSrc = (file) => inRoot(configs.pathBase, file)
 import * as middleware from './middleware/index'
-import App from '../../src/containers/App'
+
+import Provider from '../../src/Provider'
+import {stores} from '../../src/Provider'
+
+// import App from '../../src/containers/App'
+// import createStore from '../../src/store/createStore'
+// const stores = createStore()
 
 let app = express()
 
@@ -29,11 +35,13 @@ app.get('*', (req, res) => {
     status:0,
   }
 
-  const initialState = {}
+  const initialState = JSON.stringify(stores)
+
+  console.log(initialState)
 
   const initialView = renderToString(
     <StaticRouter location={ req.url } context= { context } >
-      <App />
+      <Provider />
     </StaticRouter>
   )
 

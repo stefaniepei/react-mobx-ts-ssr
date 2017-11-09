@@ -24,7 +24,7 @@ class App extends React.Component<any, any> {
       : <DevTools />
     const routes = [...HomeRouters]
     return (
-      <Routers routes={routes}>
+      <Routers routes={routes} history={this.props.history}>
         {devToolsNode}
       </Routers>
     )

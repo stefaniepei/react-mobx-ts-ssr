@@ -14,7 +14,6 @@ const inRootSrc = (file) => inRoot(configs.pathBase, file)
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
-const __SSR__ = process.env.RENDER_TYPE === 'server'
 
 const config = {
   name: 'client',
@@ -23,10 +22,10 @@ const config = {
     modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
-  devtool: 'source-map',
+  devtool: __DEV__ ? 'source-map' : false,
   entry: {
     main: [
-      'react-hot-loader/patch',
+      // 'react-hot-loader/patch',
       inRootSrc('src/Render.tsx')
       // 'E:/shinezone-generator-reactts/build/client/index.js'
       // 'babel-polyfill',
@@ -47,10 +46,9 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin(Object.assign({
-      'process.env': { NODE_ENV: JSON.stringify(configs.env) },
+      'process.env': { NODE_ENV: JSON.stringify(configs.env)},
       __DEV__,
       __PROD__,
-      __SSR__,
     })),
     new CheckerPlugin(),
   ]

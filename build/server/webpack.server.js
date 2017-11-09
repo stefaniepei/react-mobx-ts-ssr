@@ -14,6 +14,7 @@ const inRootSrc = (file) => inRoot(configs.pathBase, file)
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
+const __SSR__ = process.env.RENDER_TYPE === 'server'
 
 const config = {
   name: 'server',
@@ -46,6 +47,7 @@ const config = {
       'process.env': { NODE_ENV: JSON.stringify(configs.env), RENDER_TYPE: JSON.stringify(configs.render)},
       __DEV__,
       __PROD__,
+      __SSR__,
     })),
     new CheckerPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
