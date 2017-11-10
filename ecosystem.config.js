@@ -4,7 +4,7 @@ module.exports = (function () {
     apps: [ // 应用可以配置多个应用，这里是启动的配置项
       {
         name: 'dev-mobx', // 显示在pm2里的名称
-        script: 'backend/index.js', // 启动脚本
+        script: 'dist/server.bundle.js', // 启动脚本
         exec_mode: 'cluster', // 集群模式
         instance: 1, // 启动一个实例
         env: { // 默认环境为development
