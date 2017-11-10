@@ -1,11 +1,13 @@
 /* tslint:disable no-unused-variable*/
 import * as React from 'react'
 import {observer, inject} from 'mobx-react'
+import Utils from '../../utils'
 // import './index.less'
 
 /** 所有需用到的组件 **/
 
 interface props {
+  cookies: any,
   Base: any
 }
 
@@ -18,14 +20,17 @@ class Home extends React.Component<props,any> {
     super(props)
   }
 
-  componentDidMount() {
-
+  componentWillReact() {
+    console.log('componentWillReact',this.props.cookies)
   }
 
   render() {
     const me = this
     const {add,count} = this.props.Base
-    console.log(this)
+    const {cookies} = this.props
+    // cookies.Cookies.set('count',10, { path: '/' })
+
+    console.log('render',this.props.cookies)
     return (
       <div className='page-container' style={{background:'red'}}>
         <div>

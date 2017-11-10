@@ -5,23 +5,20 @@ import * as React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 import configs from '../../configs/index'
+import { CookiesProvider } from 'react-cookie'
+import * as cookiesMiddleware from 'universal-cookie-express'
 
-const inRoot = path.resolve.bind(path, configs.pathBase)
-const inRootSrc = (file) => inRoot(configs.pathBase, file)
 import * as middleware from './middleware/index'
 
 import Provider from '../../src/Provider'
 import {stores} from '../../src/Provider'
-
-// import App from '../../src/containers/App'
-// import createStore from '../../src/store/createStore'
-// const stores = createStore()
 
 let app = express()
 
 app.use(middleware.morgan)
 app.use(middleware.session)
 app.use(middleware.compression)
+app.use(cookiesMiddleware())
 
 app.set('view engine', 'ejs')
 app.set('views', 'src')
@@ -29,19 +26,21 @@ app.set('views', 'src')
 // app.use(express.static('public'))
 app.use(express.static('dist'))
 
-app.get('*', (req, res) => {
+app.get('*', (req:any, res) => {
   const context = {
     url:'',
     status:0,
   }
-
+  // cookie.setRawCookie(req.headers.cookie)
   const initialState = JSON.stringify(stores)
 
-  console.log(initialState)
+  console.log(initialState,req.universalCookies,req.universalCookies.get('count'))
 
   const initialView = renderToString(
     <StaticRouter location={ req.url } context= { context } >
-      <Provider />
+      <CookiesProvider cookies={req.universalCookies}>
+        <Provider />
+      </CookiesProvider>
     </StaticRouter>
   )
 

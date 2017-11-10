@@ -5,6 +5,8 @@ import { Provider as MobxProvider } from 'mobx-react'
 import { syncHistoryWithStore,RouterStore  } from 'mobx-react-router'
 import createMemoryHistory from 'history/createMemoryHistory'
 
+import { CookiesProvider } from 'react-cookie'
+
 import createStore from './store/createStore'
 import App from './containers/App'
 
@@ -24,7 +26,9 @@ export const history = syncHistoryWithStore(
 export default function Provider() {
   return (
     <MobxProvider {...stores}>
-      <App history={history} />
+      <CookiesProvider>
+        <App history={history} />
+      </CookiesProvider>
     </MobxProvider>
   )
 }

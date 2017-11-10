@@ -13,6 +13,7 @@ import {
 function Routers({
   history,
   routes,
+  cookies,
   children,
 }) {
   return (
@@ -24,6 +25,7 @@ function Routers({
           routes.map(route => (
             <Route
               key={route.path}
+              cookies={cookies}
               {...route}
             />
           ))
@@ -40,6 +42,7 @@ function Routers({
             routes.map(route => (
               <Route
                 key={route.path}
+                cookies={cookies}
                 {...route}
               />
             ))

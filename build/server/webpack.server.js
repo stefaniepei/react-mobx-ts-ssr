@@ -28,7 +28,8 @@ const config = {
     main: [
       //inRootSrc('src/Render.tsx') //run
       inRootSrc('build/server/index.js')  //build
-    ]
+    ],
+    // vendor: configs.compilerVendor
   },
   output: {
     filename: 'server.bundle.js',
@@ -71,7 +72,7 @@ config.module.rules.push({
   query: {
     cacheDirectory: true,
     plugins: ['transform-runtime'],
-    presets: ['es2015', 'react', 'stage-0']
+    presets: ['env', 'react']
   }
 })
 

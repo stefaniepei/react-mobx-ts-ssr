@@ -9,6 +9,7 @@
     "compile": "better-npm-run compile",
     "deploy": "better-npm-run deploy",
     "start:dist": "better-npm-run start:dist",
+    "server": "better-npm-run server",
     "publish:setup": "./node_modules/.bin/pm2 deploy ecosystem.config.js development setup",
     "publish": "./node_modules/.bin/pm2 deploy ecosystem.config.js development",
     "test": "cross-env NODE_ENV=development karma start build/karma.conf.js",
@@ -34,6 +35,14 @@
     },
     "start:dist": {
       "command": "node dist/server.bundle.js",
+      "env": {
+        "NODE_ENV": "production",
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
+      }
+    },
+    "server": {
+      "command": "npm run deploy && npm run start:dist",
       "env": {
         "NODE_ENV": "production",
         "RENDER_TYPE": "server",
@@ -107,6 +116,7 @@
     "morgan": "^1.9.0",
     "object-assign": "^4.1.1",
     "react": "^16.0.0",
+    "react-cookie": "^2.1.1",
     "react-dom": "^16.0.0",
     "react-hot-loader": "^3.1.1",
     "react-immutable-render-mixin": "^0.9.7",
@@ -114,6 +124,7 @@
     "rimraf": "^2.6.2",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
+    "universal-cookie-express": "^2.1.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0",
     "webpack-node-externals": "^1.6.0"
