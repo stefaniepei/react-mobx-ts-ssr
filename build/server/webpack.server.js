@@ -50,20 +50,33 @@ const config = {
       __PROD__,
       __SSR__,
     })),
-    new CheckerPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 }
 
-config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
-  excludeWarnings: true
-}))
-config.plugins.push(new ForkTsCheckerWebpackPlugin({
-  checkSyntacticErrors: true
-}))
+config.plugins.push(
+  new CheckerPlugin(),
+  new ForkTsCheckerNotifierWebpackPlugin({
+    excludeWarnings: true
+  }),
+  new ForkTsCheckerWebpackPlugin({
+    checkSyntacticErrors: true
+  })
+)
 
-
-
+config.plugins.push(
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin({
+    mangle: false,
+    comments: false,    // remove all comments
+    compress: {         // compress
+      unused: true,
+      dead_code: true,
+      screw_ie8: true,
+      warnings: false
+    },
+    sourceMap: false
+  })
+)
 
 config.module.rules.push({
   test: /\.(js|jsx)$/,

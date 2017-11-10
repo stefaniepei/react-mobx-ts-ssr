@@ -48,10 +48,18 @@ const config = {
       'process.env': { NODE_ENV: JSON.stringify(configs.env)},
       __DEV__,
       __PROD__,
-    })),
-    new CheckerPlugin(),
+    }))
   ]
 }
+config.plugins.push(
+  new CheckerPlugin(),
+  new ForkTsCheckerNotifierWebpackPlugin({
+    excludeWarnings: true
+  }),
+  new ForkTsCheckerWebpackPlugin({
+    checkSyntacticErrors: true
+  })
+)
 // Development Tools
 // ------------------------------------
 if (__DEV__) {
@@ -73,15 +81,24 @@ if (__DEV__) {
       }
     })
   )
-
 }
 
-config.plugins.push(new ForkTsCheckerNotifierWebpackPlugin({
-  excludeWarnings: true
-}))
-config.plugins.push(new ForkTsCheckerWebpackPlugin({
-  checkSyntacticErrors: true
-}))
+if(__PROD__) {
+  config.plugins.push(
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: false,
+      comments: false,    // remove all comments
+      compress: {         // compress
+        unused: true,
+        dead_code: true,
+        screw_ie8: true,
+        warnings: false
+      },
+      sourceMap: false
+    })
+  )
+}
 
 config.module.rules.push({
   test: /\.(js|jsx)$/,
