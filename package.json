@@ -107,6 +107,7 @@
     "mobx-react-router": "^4.0.1",
     "morgan": "^1.9.0",
     "object-assign": "^4.1.1",
+    "pm2": "^2.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-immutable-render-mixin": "^0.9.7",
