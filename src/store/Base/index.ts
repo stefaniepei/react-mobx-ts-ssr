@@ -1,24 +1,19 @@
 import { observable, action, runInAction } from 'mobx'
-import { withCookies, Cookies } from 'react-cookie'
+import * as Cookies from 'universal-cookie'
 import configs from '../../../configs'
 const isNode = typeof window === 'undefined'
 
-export default class Base {
-  @observable count = 0
+const cookies = new Cookies()
 
-  // constructor() {
-  //   const initialState = (configs.render === 'server' && !isNode && window.__INITIAL_STATE__.hasOwnProperty('Base')) ? window.__INITIAL_STATE__.Base: {}
-  //   const count = initialState && initialState.count ? initialState.count : 0;
-  //   this.set(count)
-  //   this.count = 0
-  // }
+export default class Base {
+  @observable count = +cookies.get('count') || 0
 
   @action('Base :: addCount1')
   add = () => {
     try {
       runInAction('Base :: add new count', () => {
         this.count++
-        // Cookies.set('count', `${this.count}`)
+        cookies.set('count', this.count, { path: '/' })
       })
     } catch (e) {
       runInAction('Base :: count rejected', () => {

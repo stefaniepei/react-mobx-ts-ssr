@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-import { withCookies, Cookies } from 'react-cookie'
 
 import configs from '../configs'
 import Provider from './Provider'

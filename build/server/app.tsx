@@ -5,9 +5,7 @@ import * as React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 import configs from '../../configs/index'
-import { CookiesProvider } from 'react-cookie'
-import * as cookiesMiddleware from 'universal-cookie-express'
-
+import * as Cookies from 'universal-cookie'
 import * as middleware from './middleware/index'
 
 import Provider from '../../src/Provider'
@@ -18,7 +16,6 @@ let app = express()
 app.use(middleware.morgan)
 app.use(middleware.session)
 app.use(middleware.compression)
-app.use(cookiesMiddleware())
 
 app.set('view engine', 'ejs')
 app.set('views', 'src')
@@ -31,17 +28,12 @@ app.get('*', (req:any, res) => {
     url:'',
     status:0,
   }
-  // stores.Base.count = +req.universalCookies.get('count') || 0
-  stores.Base.set(+req.universalCookies.get('count'))
-  const initialState = JSON.stringify(stores)
 
-  console.log(initialState,req.universalCookies)
+  const initialState = JSON.stringify(stores)
 
   const initialView = renderToString(
     <StaticRouter location={ req.url } context= { context } >
-      <CookiesProvider cookies={req.universalCookies}>
         <Provider />
-      </CookiesProvider>
     </StaticRouter>
   )
 

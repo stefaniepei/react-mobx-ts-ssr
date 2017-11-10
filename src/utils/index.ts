@@ -1,4 +1,4 @@
-import * as Cookies from 'react-cookie'
+import * as Cookies from 'universal-cookie'
 
 const Utils = {
 

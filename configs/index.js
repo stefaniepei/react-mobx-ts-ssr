@@ -12,8 +12,7 @@ export default {
   compilerVendor: [
     'react',
     'react-dom',
-    'react-router-dom',
-    'react-cookie'
+    'react-router-dom'
   ],
   sourcemaps: false,
   globals: {},

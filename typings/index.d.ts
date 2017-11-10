@@ -1,5 +1,4 @@
-declare module 'react-cookie'
-declare module 'universal-cookie-express'
+declare module 'universal-cookie'
 // declare var process: any
 declare var module:NodeModule
 interface Window {

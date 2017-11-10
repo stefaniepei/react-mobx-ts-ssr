@@ -1,9 +1,6 @@
 /* tslint:disable no-unused-variable*/
 import * as React from 'react'
 import {observer, inject} from 'mobx-react'
-
-import { withCookies, Cookies } from 'react-cookie'
-import Utils from '../../utils'
 // import './index.less'
 
 /** 所有需用到的组件 **/
@@ -20,13 +17,14 @@ class Home extends React.Component<props,any> {
 
   constructor(props: props) {
     super(props)
+    // const cookies = new Cookies();
 
-    const isNode = typeof window === 'undefined'
-    if(!isNode){
-      const cookieCount = this.props.cookies.get('count')
-      console.log('cookieCount:',cookieCount)
-      this.props.Base.set(cookieCount)
-    }
+    // const isNode = typeof window === 'undefined'
+    // if(!isNode){
+    //   const cookieCount = +this.props.cookies.get('count') || 0
+    //   console.log('cookieCount:',cookieCount)
+    //   this.props.Base.set(cookieCount)
+    // }
   }
 
   componentWillReact() {
@@ -36,10 +34,10 @@ class Home extends React.Component<props,any> {
   render() {
     const me = this
     const {add,count} = this.props.Base
-    const {cookies} = this.props
-    cookies.set('count',count, { path: '/' })
+    // const {cookies} = this.props
+    // cookies.set('count',count, { path: '/' })
 
-    console.log('render',this.props.cookies,this)
+    // console.log('render',this.props.cookies,this)
     return (
       <div className='page-container' style={{background:'red'}}>
         <div>
@@ -56,4 +54,4 @@ class Home extends React.Component<props,any> {
   }
 }
 
-export default withCookies(Home)
+export default Home
