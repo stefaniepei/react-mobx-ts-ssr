@@ -1,16 +1,16 @@
-import webpack from 'webpack'
-import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import nodeExternals from 'webpack-node-externals'
-import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import * as webpack from 'webpack'
+import * as path from 'path'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as nodeExternals from 'webpack-node-externals'
+import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
+import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
-import _debug from 'debug'
-import configs from '../../configs/index'
+import * as _debug from 'debug'
+import configs from '../../configs'
 
 const inRoot = path.resolve.bind(path, configs.pathBase)
-const inRootSrc = (file) => inRoot(configs.pathBase, file)
+const inRootSrc = (file: any) => inRoot(configs.pathBase, file)
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
@@ -27,7 +27,7 @@ const config = {
   entry: {
     main: [
       //inRootSrc('src/Render.tsx') //run
-      inRootSrc('build/server/index.js')  //build
+      inRootSrc('build/server/index.ts')  //build
     ],
     // vendor: configs.compilerVendor
   },
@@ -64,7 +64,7 @@ config.plugins.push(
 )
 
 config.plugins.push(
-  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.optimize.OccurrenceOrderPlugin(true),
   new webpack.optimize.UglifyJsPlugin({
     mangle: false,
     comments: false,    // remove all comments

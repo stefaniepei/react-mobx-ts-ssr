@@ -1,13 +1,12 @@
-import webpack from 'webpack'
-import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import nodeExternals from 'webpack-node-externals'
-
-import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import * as webpack from 'webpack'
+import * as path from 'path'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as nodeExternals from 'webpack-node-externals'
+import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
+import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
-import configs from '../../configs/index'
+import configs from '../../configs'
 
 const inRoot = path.resolve.bind(path, configs.pathBase)
 const inRootSrc = (file) => inRoot(configs.pathBase, file)
@@ -85,7 +84,7 @@ if (__DEV__) {
 
 if(__PROD__) {
   config.plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
       mangle: false,
       comments: false,    // remove all comments

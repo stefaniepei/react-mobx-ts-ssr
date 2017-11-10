@@ -1,5 +1,4 @@
-'use strict';
-import koaCompress from 'koa-compress'
+import * as koaCompress from 'koa-compress'
 
 class CompressHandler {
   register(opts) {

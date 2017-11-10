@@ -1,23 +1,23 @@
-import fs from 'fs-extra'
-import path from 'path'
-import webpack from 'webpack'
+import * as fs from 'fs-extra'
+import * as path from 'path'
+import * as webpack from 'webpack'
 import serverConfig from './webpack.server'
 import clientConfig from '../client/webpack.client'
 import configs from '../../configs'
 
-import _debug from 'debug'
+import * as _debug from 'debug'
 const debug = _debug('app:server:compile');
 
 const inRoot = path.resolve.bind(path, configs.pathBase)
-const inRootSrc = (file) => inRoot(configs.pathBase, file)
+const inRootSrc = (file: any) => inRoot(configs.pathBase, file)
 
-const webpackCompiler = (config, statsFormat = { chunks : false, chunkModules : false, colors : true}) => {
-  return new Promise((resolve, reject) => {
+const webpackCompiler = (config: any, statsFormat?: any) => {
+  return new Promise((resolve: any, reject: any) => {
     const compiler = webpack(config);
-    compiler.run((err, stats) => {
+    compiler.run((err: any, stats: any) => {
       const jsonStats = stats.toJson();
       debug('Webpack compile completed.');
-      debug(stats.toString(statsFormat));
+      // debug(stats.toString(statsFormat));
 
       if (err) {
         debug('Webpack compiler encountered a fatal error.', err);
@@ -40,8 +40,8 @@ const webpackCompiler = (config, statsFormat = { chunks : false, chunkModules : 
 (async function () {
   try {
     debug('Run compiler');
-    const clientStats = await webpackCompiler(clientConfig)
-    if (clientStats.warnings.length && config.compiler_fail_on_warning) {
+    const clientStats: any = await webpackCompiler(clientConfig)
+    if (clientStats.warnings.length) {
       debug('Client Config set to fail on warning, exiting with status code "1".');
       process.exit(1)
     }
@@ -53,8 +53,8 @@ const webpackCompiler = (config, statsFormat = { chunks : false, chunkModules : 
     )
 
 
-    const serverStats = await webpackCompiler(serverConfig);
-    if (serverStats.warnings.length && config.compiler_fail_on_warning) {
+    const serverStats: any = await webpackCompiler(serverConfig);
+    if (serverStats.warnings.length) {
       debug('Server Config set to fail on warning, exiting with status code "1".');
       process.exit(1)
     }

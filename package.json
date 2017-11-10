@@ -19,17 +19,9 @@
   },
   "betterScripts": {
     "start": {
-      "command": "babel-node build/client/index.js",
+      "command": "ts-node build/client/index.ts",
       "env": {
         "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "start:server": {
-      "command": "ts-node build/server/index.js",
-      "env": {
-        "NODE_ENV": "production",
-        "RENDER_TYPE": "server",
         "DEBUG": "app:*"
       }
     },
@@ -50,7 +42,7 @@
       }
     },
     "compile": {
-      "command": "babel-node build/server/compile.js",
+      "command": "ts-node build/server/compile.ts",
       "env": {
         "NODE_ENV": "production",
         "RENDER_TYPE": "server",

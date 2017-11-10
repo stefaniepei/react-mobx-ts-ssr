@@ -1,16 +1,15 @@
-import Koa from 'koa'
-import KoaStatic from 'koa-static'
-// import KoaProxy from 'koa-proxy'
-import convert from 'koa-convert'
-import webpack from 'webpack'
-import webpackConfig from './webpack.client'
-import historyApiFallback from 'koa-connect-history-api-fallback'
-import path from 'path'
-import fs from 'fs-extra'
-import _debug from 'debug'
+import * as Koa from 'koa'
+import * as KoaStatic from 'koa-static'
+import * as convert from 'koa-convert'
+import * as webpack from 'webpack'
+import * as historyApiFallback from 'koa-connect-history-api-fallback'
+import * as path from 'path'
+import * as fs from 'fs-extra'
+import * as _debug from 'debug'
 import configs from '../../configs'
 import webpackDevMiddleware from '../middleware/webpack-dev'
 import webpackHMRMiddleware from '../middleware/webpack-hmr'
+import webpackConfig from './webpack.client'
 import compressHandlerMiddleware from '../middleware/compress-handler'
 
 const debug = _debug('app:server');
@@ -23,7 +22,7 @@ app.use(convert(historyApiFallback({
 })));
 
 
-const compiler = webpack(webpackConfig);
+const compiler = webpack(webpackConfig as any);
 
 // Enable webpack-dev and webpack-hot middleware
 const { publicPath } = webpackConfig.output;

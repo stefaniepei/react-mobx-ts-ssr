@@ -1,13 +1,13 @@
-import WebpackHotMiddleware from 'webpack-hot-middleware'
-import _debug from 'debug'
+import * as WebpackHotMiddleware from 'webpack-hot-middleware'
+import * as _debug from 'debug'
 
 const debug = _debug('app:server:webpack-hmr');
 
-export default function (compiler, opts) {
+export default (compiler: any, opts?: any) => {
   debug('Enable Webpack Hot Module Replacement (HMR).');
 
   const middleware = WebpackHotMiddleware(compiler, opts);
-  return async function koaWebpackHMR (ctx, next) {
+  return async function koaWebpackHMR (ctx: any, next: any) {
     let hasNext = await applyExpressMiddleware(middleware, ctx.req, ctx.res);
 
     if (hasNext && next) {
@@ -18,7 +18,7 @@ export default function (compiler, opts) {
 
 
 
-function applyExpressMiddleware (fn, req, res) {
+function applyExpressMiddleware (fn: any, req: any, res: any) {
   const originalEnd = res.end;
 
   return new Promise((resolve) => {

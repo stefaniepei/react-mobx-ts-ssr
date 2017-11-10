@@ -6,15 +6,14 @@ import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 import configs from '../../configs/index'
 import * as Cookies from 'universal-cookie'
-import * as middleware from './middleware/index'
+import middleware from './middleware'
 
 import Provider from '../../src/Provider'
 import {stores} from '../../src/Provider'
 
 let app = express()
 
-app.use(middleware.morgan)
-app.use(middleware.session)
+// app.use(middleware.morgan)
 app.use(middleware.compression)
 
 app.set('view engine', 'ejs')
