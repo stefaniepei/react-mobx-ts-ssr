@@ -1,7 +1,5 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-
 import { withCookies, Cookies } from 'react-cookie'
 
 import configs from '../configs'
@@ -10,15 +8,11 @@ import Provider from './Provider'
 const render = (Component) => {
   configs.render === 'server' ?
   ReactDom.hydrate(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
+    <Component />,
     document.getElementById('app')
   ) :
   ReactDom.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
+    <Component />,
     document.getElementById('app')
   )
 }

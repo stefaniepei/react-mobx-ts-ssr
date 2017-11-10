@@ -1,6 +1,8 @@
 /* tslint:disable no-unused-variable*/
 import * as React from 'react'
 import {observer, inject} from 'mobx-react'
+
+import { withCookies, Cookies } from 'react-cookie'
 import Utils from '../../utils'
 // import './index.less'
 
@@ -11,26 +13,33 @@ interface props {
   Base: any
 }
 
-@inject('RouterStore')
+// @inject('RouterStore')
 @inject('Base')
 @observer
 class Home extends React.Component<props,any> {
 
   constructor(props: props) {
     super(props)
+
+    const isNode = typeof window === 'undefined'
+    if(!isNode){
+      const cookieCount = this.props.cookies.get('count')
+      console.log('cookieCount:',cookieCount)
+      this.props.Base.set(cookieCount)
+    }
   }
 
   componentWillReact() {
-    console.log('componentWillReact',this.props.cookies)
+    console.log('componentWillReact',this)
   }
 
   render() {
     const me = this
     const {add,count} = this.props.Base
     const {cookies} = this.props
-    // cookies.Cookies.set('count',10, { path: '/' })
+    cookies.set('count',count, { path: '/' })
 
-    console.log('render',this.props.cookies)
+    console.log('render',this.props.cookies,this)
     return (
       <div className='page-container' style={{background:'red'}}>
         <div>
@@ -47,4 +56,4 @@ class Home extends React.Component<props,any> {
   }
 }
 
-export default Home
+export default withCookies(Home)

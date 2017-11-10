@@ -25,7 +25,6 @@ const config = {
   devtool: __DEV__ ? 'source-map' : false,
   entry: {
     main: [
-      // 'react-hot-loader/patch',
       inRootSrc('src/Render.tsx')
       // 'E:/shinezone-generator-reactts/build/client/index.js'
       // 'babel-polyfill',

@@ -1,19 +1,19 @@
 import * as React from 'react'
-import {BrowserRouter} from 'react-router-dom'
 import configs from '../../configs'
 //公用组件
 // import Header from '../components/Header'
 // import Footer from '../components/Footer'
 
 import {
+  BrowserRouter,
   Route,
+  withRouter,
   Switch,
 } from 'react-router-dom'
 
 function Routers({
   history,
   routes,
-  cookies,
   children,
 }) {
   return (
@@ -25,7 +25,6 @@ function Routers({
           routes.map(route => (
             <Route
               key={route.path}
-              cookies={cookies}
               {...route}
             />
           ))
@@ -42,7 +41,6 @@ function Routers({
             routes.map(route => (
               <Route
                 key={route.path}
-                cookies={cookies}
                 {...route}
               />
             ))

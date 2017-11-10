@@ -1,4 +1,3 @@
-declare module 'react-hot-loader'
 declare module 'react-cookie'
 declare module 'universal-cookie-express'
 // declare var process: any

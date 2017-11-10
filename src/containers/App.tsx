@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { observer } from 'mobx-react'
 import DevTools from 'mobx-react-devtools'
-import { withCookies, Cookies } from 'react-cookie'
+
 // // 公用部分css
 // // import '../public/css/main.less'
 // // import '../public/css/core.less'
@@ -24,11 +24,11 @@ class App extends React.Component<any, any> {
       : <DevTools />
     const routes = [...HomeRouters]
     return (
-      <Routers routes={routes} history={this.props.history} cookies={this.props.cookies}>
+      <Routers routes={routes} history={this.props.history}>
         {devToolsNode}
       </Routers>
     )
   }
 }
 
-export default withCookies(observer(App))
+export default observer(App)

@@ -31,10 +31,11 @@ app.get('*', (req:any, res) => {
     url:'',
     status:0,
   }
-  // cookie.setRawCookie(req.headers.cookie)
+  // stores.Base.count = +req.universalCookies.get('count') || 0
+  stores.Base.set(+req.universalCookies.get('count'))
   const initialState = JSON.stringify(stores)
 
-  console.log(initialState,req.universalCookies,req.universalCookies.get('count'))
+  console.log(initialState,req.universalCookies)
 
   const initialView = renderToString(
     <StaticRouter location={ req.url } context= { context } >
