@@ -7,30 +7,29 @@ import * as path from 'path'
 import * as fs from 'fs-extra'
 import * as _debug from 'debug'
 import configs from '../../configs'
-import webpackDevMiddleware from '../middleware/webpack-dev'
-import webpackHMRMiddleware from '../middleware/webpack-hmr'
+import webpackDevMiddleware from './middleware/webpack-dev'
+import webpackHMRMiddleware from './middleware/webpack-hmr'
 import webpackConfig from './webpack.client'
-import compressHandlerMiddleware from '../middleware/compress-handler'
+// import compressHandlerMiddleware from './middleware/compress-handler'
 
-const debug = _debug('app:server');
-const app = new Koa();
+const debug = _debug('app:server')
+const app = new Koa()
+const __DEV__ = process.env.NODE_ENV === 'development'
 
-// app.use(compressHandlerMiddleware.register(true));
+// app.use(compressHandlerMiddleware.register(true))
 
 app.use(convert(historyApiFallback({
   verbose: false
-})));
+})))
 
+const compiler = webpack(webpackConfig as any)
 
-const compiler = webpack(webpackConfig as any);
-
-// Enable webpack-dev and webpack-hot middleware
-const { publicPath } = webpackConfig.output;
-
-app.use(webpackDevMiddleware(compiler, publicPath));
-app.use(webpackHMRMiddleware(compiler));
-
-
+if(__DEV__){
+  // Enable webpack-dev and webpack-hot middleware
+  const { publicPath } = webpackConfig.output;
+  app.use(webpackDevMiddleware(compiler, publicPath));
+  app.use(webpackHMRMiddleware(compiler));
+}
 
 // Serve static assets from ~/src/static since Webpack is unaware of
 // these files. This middleware doesn't need to be enabled outside

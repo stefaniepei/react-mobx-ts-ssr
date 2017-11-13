@@ -60,23 +60,30 @@ config.plugins.push(
   }),
   new ForkTsCheckerWebpackPlugin({
     checkSyntacticErrors: true
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
   })
 )
 
-config.plugins.push(
-  new webpack.optimize.OccurrenceOrderPlugin(true),
-  new webpack.optimize.UglifyJsPlugin({
-    mangle: false,
-    comments: false,    // remove all comments
-    compress: {         // compress
-      unused: true,
-      dead_code: true,
-      screw_ie8: true,
-      warnings: false
-    },
-    sourceMap: false
-  })
-)
+if(__PROD__){
+  config.plugins.push(
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: false,
+      comments: false,    // remove all comments
+      compress: {         // compress
+        unused: true,
+        dead_code: true,
+        screw_ie8: true,
+        warnings: false
+      },
+      sourceMap: false
+    })
+  )
+}
+
 
 config.module.rules.push({
   test: /\.(js|jsx)$/,

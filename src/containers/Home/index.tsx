@@ -1,7 +1,8 @@
 /* tslint:disable no-unused-variable*/
 import * as React from 'react'
 import {observer, inject} from 'mobx-react'
-// import './index.less'
+import {Helmet} from 'react-helmet'
+// import './index.scss'
 
 /** 所有需用到的组件 **/
 
@@ -40,6 +41,11 @@ class Home extends React.Component<props,any> {
     // console.log('render',this.props.cookies,this)
     return (
       <div className='page-container' style={{background:'red'}}>
+        <Helmet>
+          <title>首页的标题</title>
+          <meta name="keywords" content="首页的关键字" />
+          <meta name="description" content="首页的描述" />
+        </Helmet>
         <div>
           Home {count}
         </div>

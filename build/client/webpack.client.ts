@@ -25,10 +25,6 @@ const config = {
   entry: {
     main: [
       inRootSrc('src/Render.tsx')
-      // 'E:/shinezone-generator-reactts/build/client/index.js'
-      // 'babel-polyfill',
-      // inRootSrc('src/Render.tsx') //run
-      // inRootSrc('build/client/index.js')  //build
     ]
   },
   output: {
@@ -57,6 +53,10 @@ config.plugins.push(
   }),
   new ForkTsCheckerWebpackPlugin({
     checkSyntacticErrors: true
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
   })
 )
 // Development Tools
@@ -69,7 +69,6 @@ if (__DEV__) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   )
-
   config.plugins.push(
     new HtmlWebpackPlugin({
       template: inRootSrc('src/index.html'),

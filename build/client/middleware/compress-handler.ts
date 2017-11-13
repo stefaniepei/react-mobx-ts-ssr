@@ -9,6 +9,6 @@ class CompressHandler {
   }
 }
 
-const handler = new CompressHandler();
+const handler = new CompressHandler()
 
 export default handler

@@ -16,8 +16,6 @@ export default (compiler: any, opts?: any) => {
   }
 }
 
-
-
 function applyExpressMiddleware (fn: any, req: any, res: any) {
   const originalEnd = res.end;
 

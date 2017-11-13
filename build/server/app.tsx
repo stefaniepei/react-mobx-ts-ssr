@@ -4,8 +4,10 @@ import * as path from 'path'
 import * as React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
-import configs from '../../configs/index'
 import * as Cookies from 'universal-cookie'
+import {Helmet} from 'react-helmet'
+
+import configs from '../../configs/index'
 import middleware from './middleware'
 
 import Provider from '../../src/Provider'
@@ -23,11 +25,7 @@ app.set('views', 'src')
 app.use(express.static('dist'))
 
 app.get('*', (req:any, res) => {
-  const context = {
-    url:'',
-    status:0,
-  }
-
+  const context:any = {}
   const initialState = JSON.stringify(stores)
 
   const initialView = renderToString(
@@ -35,16 +33,10 @@ app.get('*', (req:any, res) => {
         <Provider />
     </StaticRouter>
   )
-
-  if (context.url) {
-    res.redirect(context.url, context.status)
-  } else {
-    if (context.status) {
-      res.status(context.status)
-    }
-
-    res.render('index', { initialView, initialState })
-  }
+  const helmet = Helmet.renderStatic()
+  const initialTitle = helmet.title.toString()
+  const initialMeta = helmet.meta.toString()
+  res.render('index', { initialView, initialState, initialTitle, initialMeta })
 })
 
 export default app

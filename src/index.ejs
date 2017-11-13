@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Server Side Rendering Test</title>
+    <%- initialTitle %>
+    <%- initialMeta %>
     <script type="text/javascript">
       var __INITIAL_STATE__ = <%- JSON.stringify(initialState).replace(/</g, '\\u003c') %>;
     </script>

@@ -1,9 +1,9 @@
 import * as WebpackDevMiddleware from 'webpack-dev-middleware'
 import * as path from 'path'
 import * as _debug from 'debug'
-const debug = _debug('app:server:webpack-dev');
+const debug = _debug('app:server:webpack-dev')
 
-import configs from '../../configs'
+import configs from '../../../configs'
 
 export default (compiler: any, publicPath: any) => {
   debug('Enable webpack dev middleware.');
@@ -16,7 +16,7 @@ export default (compiler: any, publicPath: any) => {
     noInfo: false,
     lazy: false,
     stats: false
-  });
+  })
 
   return async (ctx: any, next: any) => {
     let hasNext = await applyExpressMiddleware(middleware, ctx.req, {
@@ -24,7 +24,7 @@ export default (compiler: any, publicPath: any) => {
       setHeader: function () {
         ctx.set.apply(ctx, arguments)
       }
-    });
+    })
 
     if (hasNext) {
       await next()
