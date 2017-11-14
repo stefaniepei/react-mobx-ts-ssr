@@ -120,18 +120,18 @@ if(__PROD__){
     new webpack.LoaderOptionsPlugin({
         minimize: true
     }),
-    // new webpack.optimize.OccurrenceOrderPlugin(true),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   mangle: false,
-    //   comments: false,    // remove all comments
-    //   compress: {         // compress
-    //     unused: true,
-    //     dead_code: true,
-    //     screw_ie8: true,
-    //     warnings: false
-    //   },
-    //   sourceMap: false
-    // })
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: false,
+      comments: false,    // remove all comments
+      compress: {         // compress
+        unused: true,
+        dead_code: true,
+        screw_ie8: true,
+        warnings: false
+      },
+      sourceMap: false
+    })
   )
 }
 

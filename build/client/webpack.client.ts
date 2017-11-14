@@ -48,63 +48,6 @@ const config = {
     }))
   ]
 }
-config.plugins.push(
-  new CheckerPlugin(),
-  new ForkTsCheckerNotifierWebpackPlugin({
-    excludeWarnings: true
-  }),
-  new ForkTsCheckerWebpackPlugin({
-    checkSyntacticErrors: true
-  }),
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery'
-  })
-)
-// Development Tools
-// ------------------------------------
-if (__DEV__) {
-  config.entry.main.push(
-    `webpack-hot-middleware/client.js?path=/__webpack_hmr&timeout=1000&reload=true`
-  )
-  config.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
-  )
-  config.plugins.push(
-    new HtmlWebpackPlugin({
-      template: inRootSrc('src/index.html'),
-      hash: false,
-      inject: true,
-      manify: {
-        collapseWhitespace: true
-      }
-    })
-  )
-}
-
-if(__PROD__) {
-  config.plugins.push(
-    new ExtractTextPlugin({
-        filename: 'styles.css'
-    }),
-    new webpack.LoaderOptionsPlugin({
-        minimize: true
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: false,
-      comments: false,    // remove all comments
-      compress: {         // compress
-        unused: true,
-        dead_code: true,
-        screw_ie8: true,
-        warnings: false
-      },
-      sourceMap: false
-    })
-  )
-}
 
 config.module.rules.push({
   test: /\.(js|jsx)$/,
@@ -177,5 +120,63 @@ config.module.rules.push({
   test: /\.(eot|ttf|otf|woff|woff2)$/,
   use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]']
 })
+
+config.plugins.push(
+  new CheckerPlugin(),
+  new ForkTsCheckerNotifierWebpackPlugin({
+    excludeWarnings: true
+  }),
+  new ForkTsCheckerWebpackPlugin({
+    checkSyntacticErrors: true
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
+)
+// Development Tools
+// ------------------------------------
+if (__DEV__) {
+  config.entry.main.push(
+    `webpack-hot-middleware/client.js?path=/__webpack_hmr&timeout=1000&reload=true`
+  )
+  config.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
+  )
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      template: inRootSrc('src/index.html'),
+      hash: false,
+      inject: true,
+      manify: {
+        collapseWhitespace: true
+      }
+    })
+  )
+}
+
+if(__PROD__) {
+  config.plugins.push(
+    new ExtractTextPlugin({
+        filename: 'styles.css'
+    }),
+    new webpack.LoaderOptionsPlugin({
+        minimize: true
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: false,
+      comments: false,    // remove all comments
+      compress: {         // compress
+        unused: true,
+        dead_code: true,
+        screw_ie8: true,
+        warnings: false
+      },
+      sourceMap: false
+    })
+  )
+}
 
 export default config

@@ -46,11 +46,11 @@ const webpackCompiler = (config: any, statsFormat?: any) => {
       process.exit(1)
     }
     debug('Copy client static assets to dist folder.');
-    fs.copySync(
-      // path.resolve(configs.pathBase, 'src/public'),
-      // path.resolve(configs.pathBase, configs.outDir),
-      configs.publicDir, configs.outDir
-    )
+    // fs.copySync(
+    //   // path.resolve(configs.pathBase, 'src/public'),
+    //   // path.resolve(configs.pathBase, configs.outDir),
+    //   configs.publicDir, configs.outDir
+    // )
 
 
     const serverStats: any = await webpackCompiler(serverConfig);
@@ -59,11 +59,11 @@ const webpackCompiler = (config: any, statsFormat?: any) => {
       process.exit(1)
     }
     debug('Server Copy static assets to dist folder.');
-    fs.copySync(
-      // path.resolve(configs.pathBase, 'src/public'),
-      // path.resolve(configs.pathBase, configs.outDir),
-      configs.publicDir, configs.outDir
-    )
+    // fs.copySync(
+    //   // path.resolve(configs.pathBase, 'src/public'),
+    //   // path.resolve(configs.pathBase, configs.outDir),
+    //   configs.publicDir, configs.outDir
+    // )
   } catch (e) {
     debug('Compiler encountered an error.', e);
     process.exit(1)
