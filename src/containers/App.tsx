@@ -2,12 +2,16 @@ import * as React from 'react'
 import { observer } from 'mobx-react'
 import DevTools from 'mobx-react-devtools'
 
-// // 公用部分css
-// // import '../public/css/main.less'
-// // import '../public/css/core.less'
-// // import 'antd/dist/antd.css'
+// 公用部分css
+// import 'normalize.css'
+// import 'antd/dist/antd.css'
 
-// // home组件里面的一些路由
+const __SSR__ = process.env.RENDER_TYPE === 'server'
+if(! __SSR__){
+  require('antd/dist/antd.css')
+}
+
+// home组件里面的一些路由
 import HomeRouters from '../containers/Home/router'
 
 // 统一路由方法

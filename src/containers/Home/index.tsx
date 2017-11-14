@@ -2,7 +2,8 @@
 import * as React from 'react'
 import {observer, inject} from 'mobx-react'
 import {Helmet} from 'react-helmet'
-// import './index.scss'
+import {Button} from 'antd'
+import './index.scss'
 
 /** 所有需用到的组件 **/
 
@@ -18,14 +19,6 @@ class Home extends React.Component<props,any> {
 
   constructor(props: props) {
     super(props)
-    // const cookies = new Cookies();
-
-    // const isNode = typeof window === 'undefined'
-    // if(!isNode){
-    //   const cookieCount = +this.props.cookies.get('count') || 0
-    //   console.log('cookieCount:',cookieCount)
-    //   this.props.Base.set(cookieCount)
-    // }
   }
 
   componentWillReact() {
@@ -35,22 +28,19 @@ class Home extends React.Component<props,any> {
   render() {
     const me = this
     const {add,count} = this.props.Base
-    // const {cookies} = this.props
-    // cookies.set('count',count, { path: '/' })
 
-    // console.log('render',this.props.cookies,this)
     return (
-      <div className='page-container' style={{background:'red'}}>
+      <div className='home-container'>
         <Helmet>
           <title>首页的标题</title>
           <meta name="keywords" content="首页的关键字" />
           <meta name="description" content="首页的描述" />
         </Helmet>
-        <div>
+        <div className='head'>
           Home {count}
         </div>
-        <button onClick={add}>+1</button>
-        <button onClick={this.addTest}>Test</button>
+        <Button onClick={add} type="primary">+1</Button>
+        <Button onClick={this.addTest} type="danger">Test</Button>
       </div>
     )
   }

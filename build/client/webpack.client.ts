@@ -4,6 +4,8 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as nodeExternals from 'webpack-node-externals'
 import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
+import * as autoprefixer from 'autoprefixer'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
 import configs from '../../configs'
@@ -83,6 +85,12 @@ if (__DEV__) {
 
 if(__PROD__) {
   config.plugins.push(
+    new ExtractTextPlugin({
+        filename: 'styles.css'
+    }),
+    new webpack.LoaderOptionsPlugin({
+        minimize: true
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
       mangle: false,
@@ -104,7 +112,12 @@ config.module.rules.push({
   loader: 'babel-loader',
   query: {
     cacheDirectory: true,
-    plugins: ['transform-runtime'],
+    plugins: ['transform-runtime',
+      ['import', {
+        libraryName: 'antd',
+        style: 'css'
+      }]
+    ],
     presets: ['env', 'react']
   }
 })
@@ -117,16 +130,52 @@ config.module.rules.push({
 })
 
 config.module.rules.push({
-  test: /\.(scss|sass)$/,
-  loader: ['style-loader', 'css-loader', 'sass-loader']
+  test: /\.css$/,
+  use: [
+    { loader: 'style-loader' },
+    { loader: 'css-loader' },
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [autoprefixer(
+          { browsers: ['iOS >= 7', 'Android >= 4.1',
+             'last 10 Chrome versions', 'last 10 Firefox versions',
+             'Safari >= 6', 'ie > 8']
+          }
+        )],
+      },
+    }
+  ],
 })
 
 config.module.rules.push({
-  test: /\.css$/,
-  loader: ['style-loader', 'css-loader']
+  test: /\.(scss|sass)$/,
+  use: [
+    { loader: 'style-loader' },
+    { loader: 'css-loader' },
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [autoprefixer(
+          { browsers: ['iOS >= 7', 'Android >= 4.1',
+             'last 10 Chrome versions', 'last 10 Firefox versions',
+             'Safari >= 6', 'ie > 8']
+          }
+        )],
+      },
+    },
+    { loader: 'sass-loader' }
+  ]
 })
 
+config.module.rules.push({
+  test: /\.(png|jpg|gif|svg)$/,
+  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]']
+})
 
-
+config.module.rules.push({
+  test: /\.(eot|ttf|otf|woff|woff2)$/,
+  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]']
+})
 
 export default config

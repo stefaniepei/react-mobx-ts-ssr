@@ -15,7 +15,6 @@ import {stores} from '../../src/Provider'
 
 let app = express()
 
-// app.use(middleware.morgan)
 app.use(middleware.compression)
 
 app.set('view engine', 'ejs')

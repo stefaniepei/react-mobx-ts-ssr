@@ -4,6 +4,8 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as nodeExternals from 'webpack-node-externals'
 import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
+import * as autoprefixer from 'autoprefixer'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
 import * as _debug from 'debug'
@@ -26,8 +28,7 @@ const config = {
   },
   entry: {
     main: [
-      //inRootSrc('src/Render.tsx') //run
-      inRootSrc('build/server/index.ts')  //build
+      inRootSrc('build/server/index.ts')
     ],
     // vendor: configs.compilerVendor
   },
@@ -53,38 +54,6 @@ const config = {
   ]
 }
 
-config.plugins.push(
-  new CheckerPlugin(),
-  new ForkTsCheckerNotifierWebpackPlugin({
-    excludeWarnings: true
-  }),
-  new ForkTsCheckerWebpackPlugin({
-    checkSyntacticErrors: true
-  }),
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery'
-  })
-)
-
-if(__PROD__){
-  config.plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: false,
-      comments: false,    // remove all comments
-      compress: {         // compress
-        unused: true,
-        dead_code: true,
-        screw_ie8: true,
-        warnings: false
-      },
-      sourceMap: false
-    })
-  )
-}
-
-
 config.module.rules.push({
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
@@ -104,16 +73,66 @@ config.module.rules.push({
 })
 
 config.module.rules.push({
-  test: /\.(scss|sass)$/,
-  loader: ['style-loader', 'css-loader', 'sass-loader']
+  test: /\.css$/,
+  use: [
+    { loader: 'css-loader' },
+  ]
 })
 
 config.module.rules.push({
-  test: /\.css$/,
-  loader: ['style-loader', 'css-loader']
+  test: /\.(scss|sass)$/,
+  use: [
+    { loader: 'css-loader' },
+    { loader: 'sass-loader' },
+  ]
+})
+
+config.module.rules.push({
+  test: /\.(png|jpg|gif|svg)$/,
+  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]']
+})
+
+config.module.rules.push({
+  test: /\.(eot|ttf|otf|woff|woff2)$/,
+  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]']
 })
 
 
+config.plugins.push(
+  new CheckerPlugin(),
+  new ForkTsCheckerNotifierWebpackPlugin({
+    excludeWarnings: true
+  }),
+  new ForkTsCheckerWebpackPlugin({
+    checkSyntacticErrors: true
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
+)
 
+if(__PROD__){
+  config.plugins.push(
+    // new ExtractTextPlugin({
+    //     filename: 'styles.css'
+    // }),
+    new webpack.LoaderOptionsPlugin({
+        minimize: true
+    }),
+    // new webpack.optimize.OccurrenceOrderPlugin(true),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   mangle: false,
+    //   comments: false,    // remove all comments
+    //   compress: {         // compress
+    //     unused: true,
+    //     dead_code: true,
+    //     screw_ie8: true,
+    //     warnings: false
+    //   },
+    //   sourceMap: false
+    // })
+  )
+}
 
 export default config

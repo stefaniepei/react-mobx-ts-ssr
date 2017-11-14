@@ -27,14 +27,14 @@ const compiler = webpack(webpackConfig as any)
 if(__DEV__){
   // Enable webpack-dev and webpack-hot middleware
   const { publicPath } = webpackConfig.output;
-  app.use(webpackDevMiddleware(compiler, publicPath));
-  app.use(webpackHMRMiddleware(compiler));
+  app.use(webpackDevMiddleware(compiler, publicPath))
+  app.use(webpackHMRMiddleware(compiler))
 }
 
 // Serve static assets from ~/src/static since Webpack is unaware of
 // these files. This middleware doesn't need to be enabled outside
 // of development since this directory will be copied into ~/dist
 // when the application is compiled.
-app.use(convert(KoaStatic(path.join(__dirname, '..', '..', 'public'))));
+app.use(convert(KoaStatic(path.join(__dirname, '..', '..', 'public'))))
 
 export default app

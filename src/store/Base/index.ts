@@ -1,7 +1,6 @@
 import { observable, action, runInAction } from 'mobx'
 import * as Cookies from 'universal-cookie'
 import configs from '../../../configs'
-const isNode = typeof window === 'undefined'
 
 const cookies = new Cookies()
 
