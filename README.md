@@ -9,6 +9,8 @@ React V16 + ReactRouter V4 + Mobx + TypeScript + SSR + HMR
 - [x] 支持后端渲染
 - [x] 支持tslint语法检查,提交检查
 
+no-ssr版本：https://github.com/stefaniepei/react-mobx-ts
+
 # 快速开始
 
 ## 安装
