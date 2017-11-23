@@ -3,3 +3,5 @@ bower_components/
 *.log
 .idea/
 dist/
+backend/node_modules/
+backend/build/

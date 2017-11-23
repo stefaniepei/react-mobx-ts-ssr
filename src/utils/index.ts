@@ -1,46 +1,15 @@
-import * as Cookies from 'universal-cookie'
+// import * as Cookies from 'universal-cookie'
 
 const Utils = {
 
-  getItem(key, suffix = null) {
-    if (suffix != null) {
-      if (this.isEmpty(suffix)) {
-        return null
-      }
-      key = suffix + ':' + key
-    }
-    return Cookies.get(key)
+  // 是否是图片
+  isImage(imgName = '') {
+    return /\.(png|jpg|jpeg|gif|ico)$/.test(imgName)
   },
 
-  setItem(key, value, suffix = null, expire = null) {
-
-    let opt = {
-      path: '/',
-      expires: expire
-    }
-    if (suffix != null) {
-      if (this.isEmpty(suffix)) {
-        return null;
-      }
-      key = suffix + ':' + key
-    }
-
-    return Cookies.set(key, value, opt)
-  },
-
-  removeItem(key, suffix = null) {
-
-    let opt = {
-      path: '/'
-    }
-    if (suffix != null) {
-      if (this.isEmpty(suffix)) {
-        return null
-      }
-      key = suffix + ':' + key
-    }
-
-    return Cookies.remove(key, opt)
+  // 文件是否是在规定的大小
+  isSize(size, diffSize = 1) {
+    return size / 1024 / 1024 < diffSize  //tslint:disable-line
   },
 
 }

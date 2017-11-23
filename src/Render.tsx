@@ -6,14 +6,14 @@ import Provider from './Provider'
 
 const render = (Component) => {
   configs.render === 'server' ?
-  ReactDom.hydrate(
-    <Component />,
-    document.getElementById('app')
-  ) :
-  ReactDom.render(
-    <Component />,
-    document.getElementById('app')
-  )
+    ReactDom.hydrate(
+      <Component />,
+      document.getElementById('app'),
+    ) :
+    ReactDom.render(
+      <Component />,
+      document.getElementById('app'),
+    )
 }
 
 render(Provider)

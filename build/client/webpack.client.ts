@@ -1,7 +1,6 @@
 import * as webpack from 'webpack'
 import * as path from 'path'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
-import * as nodeExternals from 'webpack-node-externals'
 import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
@@ -21,32 +20,33 @@ const config = {
   target: 'web',
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   devtool: __DEV__ ? 'source-map' : false,
   entry: {
     main: [
-      inRootSrc('src/Render.tsx')
-    ]
+      'babel-polyfill',
+      inRootSrc('src/Render.tsx'),
+    ],
   },
   output: {
     filename: 'client.bundle.js',
     path: inRootSrc('dist'),
-    publicPath: configs.compilerPublicPath
+    publicPath: configs.compilerPublicPath,
   },
   module: {
     loaders: [
     ],
     rules: [
-    ]
+    ],
   },
   plugins: [
     new webpack.DefinePlugin(Object.assign({
-      'process.env': { NODE_ENV: JSON.stringify(configs.env)},
+      'process.env': { NODE_ENV: JSON.stringify(configs.env), PORT: JSON.stringify(configs.port) },
       __DEV__,
       __PROD__,
-    }))
-  ]
+    })),
+  ],
 }
 
 config.module.rules.push({
@@ -58,18 +58,18 @@ config.module.rules.push({
     plugins: ['transform-runtime',
       ['import', {
         libraryName: 'antd',
-        style: 'css'
-      }]
+        style: 'css',
+      }],
     ],
-    presets: ['env', 'react']
-  }
+    presets: ['env', 'react'],
+  },
 })
 
 config.module.rules.push({
   test: /\.ts|tsx?$/,
   enforce: 'pre',
   loader: 'awesome-typescript-loader?configFileName=tsconfig.json',
-  exclude: /node_modules/
+  exclude: /node_modules/,
 })
 
 config.module.rules.push({
@@ -81,13 +81,14 @@ config.module.rules.push({
       loader: 'postcss-loader',
       options: {
         plugins: () => [autoprefixer(
-          { browsers: ['iOS >= 7', 'Android >= 4.1',
-             'last 10 Chrome versions', 'last 10 Firefox versions',
-             'Safari >= 6', 'ie > 8']
-          }
+          {
+            browsers: ['iOS >= 7', 'Android >= 4.1',
+              'last 10 Chrome versions', 'last 10 Firefox versions',
+              'Safari >= 6', 'ie > 8'],
+          },
         )],
       },
-    }
+    },
   ],
 })
 
@@ -100,69 +101,71 @@ config.module.rules.push({
       loader: 'postcss-loader',
       options: {
         plugins: () => [autoprefixer(
-          { browsers: ['iOS >= 7', 'Android >= 4.1',
-             'last 10 Chrome versions', 'last 10 Firefox versions',
-             'Safari >= 6', 'ie > 8']
-          }
+          {
+            browsers: ['iOS >= 7', 'Android >= 4.1',
+              'last 10 Chrome versions', 'last 10 Firefox versions',
+              'Safari >= 6', 'ie > 8'],
+          },
         )],
       },
     },
-    { loader: 'sass-loader' }
-  ]
+    { loader: 'sass-loader' },
+  ],
 })
 
 config.module.rules.push({
   test: /\.(png|jpg|gif|svg)$/,
-  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]']
+  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]'],
 })
 
 config.module.rules.push({
   test: /\.(eot|ttf|otf|woff|woff2)$/,
-  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]']
+  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]'],
 })
 
 config.plugins.push(
   new CheckerPlugin(),
   new ForkTsCheckerNotifierWebpackPlugin({
-    excludeWarnings: true
+    excludeWarnings: true,
   }),
   new ForkTsCheckerWebpackPlugin({
-    checkSyntacticErrors: true
+    checkSyntacticErrors: true,
   }),
   new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: 'jquery'
-  })
+    jQuery: 'jquery',
+  }),
 )
 // Development Tools
 // ------------------------------------
 if (__DEV__) {
   config.entry.main.push(
-    `webpack-hot-middleware/client.js?path=/__webpack_hmr&timeout=1000&reload=true`
+    `webpack-hot-middleware/client.js?path=/__webpack_hmr&timeout=1000&reload=true`,
   )
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
   )
   config.plugins.push(
     new HtmlWebpackPlugin({
       template: inRootSrc('src/index.html'),
+      favicon: inRootSrc('favicon.ico'),
       hash: false,
       inject: true,
       manify: {
-        collapseWhitespace: true
-      }
-    })
+        collapseWhitespace: true,
+      },
+    }),
   )
 }
 
-if(__PROD__) {
+if (__PROD__) {
   config.plugins.push(
     new ExtractTextPlugin({
-        filename: 'styles.css'
+      filename: 'styles.css',
     }),
     new webpack.LoaderOptionsPlugin({
-        minimize: true
+      minimize: true,
     }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
@@ -171,11 +174,11 @@ if(__PROD__) {
       compress: {         // compress
         unused: true,
         dead_code: true,
-        screw_ie8: true,
-        warnings: false
+        screw_ie8: false,
+        warnings: false,
       },
-      sourceMap: false
-    })
+      sourceMap: false,
+    }),
   )
 }
 

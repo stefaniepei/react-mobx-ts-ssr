@@ -30,7 +30,7 @@
     "no-var-keyword": true,
     "switch-default": true,
     "no-eval": true,
-    "no-magic-numbers": true,
+    "no-magic-numbers": false,
     "no-unused-variable": true,
     "no-trailing-whitespace": [
       true,

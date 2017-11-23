@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import './index.scss'
 
 /** 所有需用到的组件 **/
@@ -23,8 +23,8 @@ class Login extends React.Component {
       <div className='login-container'>
         <Helmet>
           <title>登录页的标题</title>
-          <meta name="keywords" content="登录页的关键字" />
-          <meta name="description" content="登录页的描述" />
+          <meta name='keywords' content='登录页的关键字' />
+          <meta name='description' content='登录页的描述' />
         </Helmet>
         <div className='head'>
           Login

@@ -4,11 +4,8 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as nodeExternals from 'webpack-node-externals'
 import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
-import * as autoprefixer from 'autoprefixer'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
-import * as _debug from 'debug'
 import configs from '../../configs'
 
 const inRoot = path.resolve.bind(path, configs.pathBase)
@@ -24,11 +21,11 @@ const config = {
   externals: [nodeExternals()],
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   entry: {
     main: [
-      inRootSrc('build/server/index.ts')
+      inRootSrc('build/server/index.ts'),
     ],
     // vendor: configs.compilerVendor
   },
@@ -42,16 +39,16 @@ const config = {
     loaders: [
     ],
     rules: [
-    ]
+    ],
   },
   plugins: [
     new webpack.DefinePlugin(Object.assign({
-      'process.env': { NODE_ENV: JSON.stringify(configs.env), RENDER_TYPE: JSON.stringify(configs.render)},
+      'process.env': { NODE_ENV: JSON.stringify(configs.env), RENDER_TYPE: JSON.stringify(configs.render), PORT: JSON.stringify(configs.port) },
       __DEV__,
       __PROD__,
       __SSR__,
     })),
-  ]
+  ],
 }
 
 config.module.rules.push({
@@ -61,22 +58,22 @@ config.module.rules.push({
   query: {
     cacheDirectory: true,
     plugins: ['transform-runtime'],
-    presets: ['env', 'react']
-  }
+    presets: ['env', 'react'],
+  },
 })
 
 config.module.rules.push({
   test: /\.ts|tsx?$/,
   enforce: 'pre',
   loader: 'awesome-typescript-loader?configFileName=tsconfig.json',
-  exclude: /node_modules/
+  exclude: /node_modules/,
 })
 
 config.module.rules.push({
   test: /\.css$/,
   use: [
     { loader: 'css-loader' },
-  ]
+  ],
 })
 
 config.module.rules.push({
@@ -84,41 +81,44 @@ config.module.rules.push({
   use: [
     { loader: 'css-loader' },
     { loader: 'sass-loader' },
-  ]
+  ],
 })
 
 config.module.rules.push({
   test: /\.(png|jpg|gif|svg)$/,
-  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]']
+  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]'],
 })
 
 config.module.rules.push({
   test: /\.(eot|ttf|otf|woff|woff2)$/,
-  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]']
+  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]'],
 })
-
 
 config.plugins.push(
   new CheckerPlugin(),
   new ForkTsCheckerNotifierWebpackPlugin({
-    excludeWarnings: true
+    excludeWarnings: true,
   }),
   new ForkTsCheckerWebpackPlugin({
-    checkSyntacticErrors: true
+    checkSyntacticErrors: true,
   }),
   new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: 'jquery'
-  })
+    jQuery: 'jquery',
+  }),
 )
-
-if(__PROD__){
+config.plugins.push(
+  new HtmlWebpackPlugin({
+    favicon: inRootSrc('favicon.ico'),
+  }),
+)
+if (__PROD__) {
   config.plugins.push(
     // new ExtractTextPlugin({
     //     filename: 'styles.css'
     // }),
     new webpack.LoaderOptionsPlugin({
-        minimize: true
+      minimize: true,
     }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
@@ -127,11 +127,11 @@ if(__PROD__){
       compress: {         // compress
         unused: true,
         dead_code: true,
-        screw_ie8: true,
-        warnings: false
+        screw_ie8: false,
+        warnings: false,
       },
-      sourceMap: false
-    })
+      sourceMap: false,
+    }),
   )
 }
 

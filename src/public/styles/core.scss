@@ -1,0 +1,88 @@
+@import "_font";
+:global {
+    $skinColor: #108EE9;
+    em {
+        font-style: normal;
+    }
+    a:hover,
+    a:focus {
+        text-decoration: none;
+    }
+     :focus {
+        outline: none !important;
+    }
+    .cf {
+        zoom: 1;
+    }
+    .cf:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+    .hide {
+        display: none;
+    }
+    .show {
+        display: block;
+    }
+    .fl {
+        float: left;
+    }
+    .fr {
+        float: right;
+    }
+    .text-overflow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .border-box {
+        box-sizing: border-box;
+    }
+    .border-box * {
+        box-sizing: inherit;
+    }
+    .content-box {
+        box-sizing: content-box;
+    }
+    .content-box * {
+        box-sizing: inherit;
+    }
+    body {
+        // font-size: 14px;
+        // min-width: 1246px;
+        min-height: 100%;
+        #wrapper {
+            height: 100%;
+        }
+    }
+    .ant-breadcrumb-link {
+        cursor: pointer;
+    }
+    .error {
+        color: #f04134!important;
+    }
+    .all_warp {
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+    .all_nowarp {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .link-color {
+        color: #108EE9;
+    }
+    .myedit-table {
+        td {
+            max-width: 300px;
+            min-width: 50px;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+        }
+    }
+}

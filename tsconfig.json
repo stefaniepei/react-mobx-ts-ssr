@@ -1,34 +1,45 @@
 {
   "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "allowJs": true,
-      "lib": ["es2015", "es5", "dom"],
-      "types": ["node", "express"],
-      "typeRoots": [
-        "node_modules/@types"
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": true,
+    "lib": [
+      "es2015",
+      "es5",
+      "dom"
+    ],
+    "types": [
+      "node",
+      "express"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "jsx": "react",
+    "sourceMap": true,
+    "rootDir": "./",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "g-src/*": [
+        "./src/*"
       ],
-      "jsx": "react",
-      "sourceMap": true,
-      "rootDir": "./",
-      "outDir": "./dist",
-      "moduleResolution": "node",
-      "preserveConstEnums": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "allowSyntheticDefaultImports": true,
-      "baseUrl": "./src",
-      "paths": {
-        "g-src/*": ["./src/*"],
-        "g-src": ["./src"]
-      }
+      "g-src": [
+        "./src"
+      ]
+    }
   },
   "include": [
-      "./src/**/*.ts",
-      "./src/**/*.tsx",
-      "./build/server/*.ts",
-      "./build/server/*.tsx",
-      "./typings/**/*.d.ts"
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./build/server/*.ts",
+    "./build/server/*.tsx",
+    "./typings/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -1,0 +1,60 @@
+@import "_font";
+html {
+    font-size: 62.5%;
+}
+
+@media (max-width: 948px) {
+    html {
+        font-size: 39%;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    html {
+        font-size: 32.5%;
+    }
+}
+
+
+/* iPhone 4 ----------- */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    html {
+        font-size: 32.5%;
+    }
+}
+
+
+/* iPhone 5 && 5s ----------- */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+    html {
+        font-size: 32.5%;
+    }
+}
+
+
+/* iPhone 6 ----------- */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    html {
+        font-size: 32.5%;
+    }
+}
+
+
+/* iPhone 6+ ----------- */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+    html {
+        font-size: 32.5%;
+    }
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    li {
+        list-style: none
+    }
+}

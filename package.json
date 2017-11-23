@@ -1,15 +1,20 @@
 {
-  "name": "shinezone-generator",
-  "version": "1.0.0",
+  "name": "shinezone-web-officialsite-2018",
+  "version": "3.1.0",
   "description": "react16+react-router4+mobx+ssr",
+  "pre-commit": [
+    "lint"
+  ],
   "scripts": {
     "start": "better-npm-run start",
-    "start:server": "better-npm-run start:server",
     "clean": "rimraf dist",
-    "compile": "better-npm-run compile",
     "deploy": "better-npm-run deploy",
+    "deploy:dev": "better-npm-run deploy:dev",
+    "deploy:qa": "better-npm-run deploy:qa",
     "start:dist": "better-npm-run start:dist",
     "server": "better-npm-run server",
+    "dev": "better-npm-run dev",
+    "qa": "better-npm-run qa",
     "publish:setup": "./node_modules/.bin/pm2 deploy ecosystem.config.js development setup",
     "publish": "./node_modules/.bin/pm2 deploy ecosystem.config.js development",
     "test": "cross-env NODE_ENV=development karma start build/karma.conf.js",
@@ -29,6 +34,52 @@
       "command": "node dist/server.bundle.js",
       "env": {
         "NODE_ENV": "production",
+        "PORT": "8012",
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:dev": {
+      "command": "npm run clean && ts-node build/server/compile.ts",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "8010",
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
+      }
+    },
+    "dev": {
+      "command": "npm run deploy:dev && npm run start:dist",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "8010",
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy:qa": {
+      "command": "npm run clean && ts-node build/server/compile.ts",
+      "env": {
+        "NODE_ENV": "qa",
+        "PORT": "8011",
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
+      }
+    },
+    "qa": {
+      "command": "npm run deploy:qa && npm run start:dist",
+      "env": {
+        "NODE_ENV": "qa",
+        "PORT": "8011",
+        "RENDER_TYPE": "server",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy": {
+      "command": "npm run clean && ts-node build/server/compile.ts",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": "8012",
         "RENDER_TYPE": "server",
         "DEBUG": "app:*"
       }
@@ -37,22 +88,7 @@
       "command": "npm run deploy && npm run start:dist",
       "env": {
         "NODE_ENV": "production",
-        "RENDER_TYPE": "server",
-        "DEBUG": "app:*"
-      }
-    },
-    "compile": {
-      "command": "ts-node build/server/compile.ts",
-      "env": {
-        "NODE_ENV": "production",
-        "RENDER_TYPE": "server",
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy": {
-      "command": "npm run clean && npm run compile",
-      "env": {
-        "NODE_ENV": "production",
+        "PORT": "8012",
         "RENDER_TYPE": "server",
         "DEBUG": "app:*"
       }
@@ -73,7 +109,7 @@
     "@types/react-router-dom": "^4.2.1",
     "@types/webpack": "^3.8.1",
     "@types/webpack-env": "^1.13.2",
-    "antd": "^2.13.10",
+    "antd": "^3.0.0-beta.7",
     "autoprefixer": "^7.1.6",
     "awesome-typescript-loader": "^3.3.0",
     "axios": "^0.17.1",
@@ -94,6 +130,7 @@
     "babel-runtime": "^6.26.0",
     "compression": "^1.7.1",
     "css-loader": "^0.28.7",
+    "debug": "^3.1.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
@@ -117,10 +154,12 @@
     "mobx-react": "^4.3.4",
     "mobx-react-devtools": "^4.2.15",
     "mobx-react-router": "^4.0.1",
+    "moment": "^2.19.2",
     "node-sass": "^4.6.1",
     "object-assign": "^4.1.1",
     "pm2": "^2.7.2",
     "postcss-loader": "^2.0.8",
+    "pre-commit": "^1.2.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-helmet": "^5.2.0",
@@ -130,6 +169,8 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "ts-loader": "^3.1.1",
+    "tslint": "^5.8.0",
+    "tslint-eslint-rules": "^4.1.1",
     "typescript": "^2.6.1",
     "universal-cookie": "^2.1.0",
     "webpack-dev-middleware": "^1.12.0",

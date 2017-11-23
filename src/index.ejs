@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <%- initialTitle %>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="ie-stand">
+  <link rel="shortcut icon" href="/favicon.ico"/>
+  <%- initialTitle %>
     <%- initialMeta %>
-    <script type="text/javascript">
-      var __INITIAL_STATE__ = <%- JSON.stringify(initialState).replace(/</g, '\\u003c') %>;
-    </script>
-  </head>
-  <body>
-    <div id="app"><%- initialView %></div>
-    <script type="text/javascript" src="/client.bundle.js"></script>
-  </body>
+      <script type="text/javascript">
+        var __INITIAL_STATE__ = <%- JSON.stringify(initialState).replace(/</g, '\\u003c') %>;
+      </script>
+</head>
+
+<body>
+  <div id="app">
+    <%- initialView %>
+  </div>
+  <script type="text/javascript" src="/client.bundle.js"></script>
+</body>
+
 </html>

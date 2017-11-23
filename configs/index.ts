@@ -1,3 +1,4 @@
+/* tslint:disable */
 import * as path from 'path'
 
 export default {
@@ -8,13 +9,13 @@ export default {
   pathSrc: path.join(__dirname, '../src'),
   outDir: path.join(__dirname, '../dist'),
   publicDir: path.join(__dirname, '../src/public'),
-  port: 4000,
+  port: process.env.PORT || 4000,
   compilerVendor: [
     'react',
     'react-dom',
-    'react-router-dom'
+    'react-router-dom',
   ],
   sourcemaps: false,
   globals: {},
-  compilerPublicPath: '/'
+  compilerPublicPath: '/',
 }

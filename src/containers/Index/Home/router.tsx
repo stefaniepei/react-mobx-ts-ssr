@@ -13,6 +13,7 @@ const HomeRouters = [
   {
     path: '/',
     component: HomeIndex,
+    hasHead: true,
     exact: true,
     navOptions: {
       label: 'Home Page',
