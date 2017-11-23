@@ -1,5 +1,5 @@
 {
-  "name": "shinezone-web-officialsite-2018",
+  "name": "react-mobx-ts-ssr",
   "version": "3.1.0",
   "description": "react16+react-router4+mobx+ssr",
   "pre-commit": [

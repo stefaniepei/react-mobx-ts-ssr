@@ -1,4 +1,4 @@
-# shinezone-generator-reactts
+# react-mobx-ts-ssr
 React V16 + ReactRouter V4 + Mobx + TypeScript + SSR + HMR
 
 # 特性
@@ -60,7 +60,7 @@ $ npm run server
 ````
 ### 项目基本信息
 #### Gitlab地址：
-https://github.com/stefaniepei/shinezone-generator-reactts.git
+https://github.com/stefaniepei/react-mobx-ts-ssr.git
 #### 分支：
 origin/master
 #### 测服地址：

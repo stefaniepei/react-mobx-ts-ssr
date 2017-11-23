@@ -24,8 +24,8 @@ module.exports = (function () {
       development: { // 部署时用到的名称
         user: 'root', // 将要部署的主机的用户
         host: ['dev-mobx'], // 将要部署的主机的域名或者IP，可以多个
-        repo: 'git@gitlab.shinezoneserver.com:Shinezone-WEB/Shinezone-WEB-OfficialSite2018.git', // git仓库
-        ref: 'origin/release/release-3.1.0', // 要使用的分支
+        repo: 'https://github.com/stefaniepei/react-mobx-ts-ssr.git', // git仓库
+        ref: 'origin/master', // 要使用的分支
         path: this.path, // 远程主机上的将要部署到的目录
         // 在setup的时候执行，这里只是在远程主机上建立目录，只在第一次执行
         'post-setup': `[ ! -d ${this.path}/source/dist ] && mkdir -p ${this.path}/source/dist; [ ! -d ${this.path}/source/backend/logs ] && mkdir -p ${this.path}/source/backend/logs `,

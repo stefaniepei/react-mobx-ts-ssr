@@ -1,4 +1,4 @@
 export default {
-  'home': 'tasdfasdf',
-  'title': '123',
+  'home': 'home',
+  'title': 'Chinese',
 }
