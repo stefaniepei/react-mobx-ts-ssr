@@ -1,6 +1,7 @@
 /* tslint:disable */
 import * as path from 'path'
 import * as webpack from 'webpack'
+import * as fs from 'fs-extra'
 import serverConfig from './webpack.server'
 import clientConfig from '../client/webpack.client'
 import configs from '../../configs'
@@ -45,12 +46,6 @@ const webpackCompiler = (config: any, statsFormat?: any) => {
       process.exit(1)
     }
     debug('Copy client static assets to dist folder.')
-    // fs.copySync(
-    //   // path.resolve(configs.pathBase, 'src/public'),
-    //   // path.resolve(configs.pathBase, configs.outDir),
-    //   configs.publicDir, configs.outDir
-    // )
-
 
     const serverStats: any = await webpackCompiler(serverConfig)
     if (serverStats.warnings.length) {
@@ -58,11 +53,9 @@ const webpackCompiler = (config: any, statsFormat?: any) => {
       process.exit(1)
     }
     debug('Server Copy static assets to dist folder.')
-    // fs.copySync(
-    //   // path.resolve(configs.pathBase, 'src/public'),
-    //   // path.resolve(configs.pathBase, configs.outDir),
-    //   configs.publicDir, configs.outDir
-    // )
+    fs.copySync(
+      configs.assetsDir, configs.outDir
+    )
   } catch (e) {
     debug('Compiler encountered an error.', e)
     process.exit(1)

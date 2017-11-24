@@ -44,16 +44,8 @@ class Home extends React.Component<props, any> {
         <Button onClick={this.addTest} type='danger'>Test</Button>
         <div style={{ paddingTop: '20px', background: '#fff' }}>
           <ul>
-            <li><Link to='/news'>News</Link></li>
-            <li><Link to='/publish'>Publish</Link></li>
+            <li><Link to='/login'>Login</Link></li>
             <li><Link to='/incubator'>Incubator</Link></li>
-            <li><Link to='/invest'>Invest</Link></li>
-            <li><Link to='/about'>About</Link></li>
-            <li><Link to='/Develop'>Develop</Link></li>
-            <li><Link to='/contact'>ContactUsIndex</Link></li>
-            <li><Link to='/protocol'>protocol</Link></li>
-            <li><Link to='/legal'>Legal</Link></li>
-            <li><Link to='/parentnotice'>parentnotice</Link></li>
 
           </ul>
         </div>

@@ -12,8 +12,6 @@ export interface i18nType {
   Options: any,
   App: {
     Home: any,
-    Incubator: any,
-    IncubatorForm: any,
   }
 }
 
@@ -48,8 +46,6 @@ export class i18n {
         Options: require('./' + _locale + '/Common/Options'),
         App: {
           Home: require('./' + _locale + '/App/Home'),
-          Incubator: require('./' + _locale + '/App/Incubator'),
-          IncubatorForm: require('./' + _locale + '/App/IncubatorForm'),
 
         },
       }

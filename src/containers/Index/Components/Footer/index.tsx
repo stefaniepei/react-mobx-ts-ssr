@@ -114,10 +114,10 @@ const footer = {
   },
   images: {
     zh_CN: {
-      webSrc: require('cn.png'),
+      // webSrc: require('cn.png'),
     },
     en_US: {
-      webSrc: require('en.png'),
+      // webSrc: require('en.png'),
     },
   },
 }

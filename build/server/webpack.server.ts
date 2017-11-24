@@ -107,11 +107,6 @@ config.plugins.push(
     jQuery: 'jquery',
   }),
 )
-config.plugins.push(
-  new HtmlWebpackPlugin({
-    favicon: inRootSrc('favicon.ico'),
-  }),
-)
 if (__PROD__) {
   config.plugins.push(
     // new ExtractTextPlugin({
@@ -125,6 +120,8 @@ if (__PROD__) {
       mangle: false,
       comments: false,    // remove all comments
       compress: {         // compress
+        drop_debugger: true,
+        drop_console: true,
         unused: true,
         dead_code: true,
         screw_ie8: false,

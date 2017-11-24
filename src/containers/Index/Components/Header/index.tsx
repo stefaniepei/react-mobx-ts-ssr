@@ -63,12 +63,12 @@ const header = {
   },
   images: {
     zh_CN: {
-      webSrc: require('../../../../public/img/web_logo.png'),
-      phoneSrc: require('../../../../public/img/m_logo.png'),
+      // webSrc: require('../../../../public/img/web_logo.png'),
+      // phoneSrc: require('../../../../public/img/m_logo.png'),
     },
     en_US: {
-      webSrc: require('../../../../public/img/web_logo_en.png'),
-      phoneSrc: require('../../../../public/img/m_logo_en.png'),
+      // webSrc: require('../../../../public/img/web_logo_en.png'),
+      // phoneSrc: require('../../../../public/img/m_logo_en.png'),
     },
   },
 }
