@@ -1,7 +1,7 @@
 import HomeRouters from './Home/router'
 
 const routes = [
-  ...HomeRouters
+  ...HomeRouters,
 ]
 
 export default routes

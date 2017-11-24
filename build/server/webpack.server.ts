@@ -1,6 +1,5 @@
 import * as webpack from 'webpack'
 import * as path from 'path'
-import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as nodeExternals from 'webpack-node-externals'
 import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
