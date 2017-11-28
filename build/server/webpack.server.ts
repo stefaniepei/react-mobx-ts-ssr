@@ -17,6 +17,9 @@ const __SSR__ = process.env.RENDER_TYPE === 'server'
 const config = {
   name: 'server',
   target: 'node',
+  node: {
+    __dirname: false,
+  },
   externals: [nodeExternals()],
   resolve: {
     modules: ['node_modules'],

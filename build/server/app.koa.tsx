@@ -23,10 +23,12 @@ app.use(convert(historyApiFallback({
   verbose: false,
 })))
 
-debug(configs.proName)
+const inRoot = path.resolve.bind(path, configs.pathBase)
+const inRootSrc = (file: any) => inRoot(configs.pathBase, file)
+debug(inRootSrc('src'))
 
 EjsRender(app, {
-  root: path.join(__dirname, configs.proName + '/src'),
+  root: inRootSrc('src'),
   layout: 'index',
   viewExt: 'ejs',
   cache: false,
