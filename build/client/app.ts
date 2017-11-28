@@ -19,14 +19,14 @@ const __DEV__ = process.env.NODE_ENV === 'development'
 // app.use(compressHandlerMiddleware.register(true))
 
 app.use(convert(historyApiFallback({
-  verbose: false
+  verbose: false,
 })))
 
-const compiler = webpack(webpackConfig as any)
 
-if(__DEV__){
+if (__DEV__) {
   // Enable webpack-dev and webpack-hot middleware
-  const { publicPath } = webpackConfig.output;
+  const compiler = webpack(webpackConfig as any)
+  const { publicPath } = webpackConfig.output
   app.use(webpackDevMiddleware(compiler, publicPath))
   app.use(webpackHMRMiddleware(compiler))
 }

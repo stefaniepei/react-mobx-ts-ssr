@@ -4,8 +4,8 @@ class CompressHandler {
   register(opts) {
     return koaCompress({
       threshold: opts.threshold || '100kb',
-      flush: require('zlib').Z_BEST_SPEED
-    });
+      flush: require('zlib').Z_BEST_SPEED,
+    })
   }
 }
 

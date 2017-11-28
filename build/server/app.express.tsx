@@ -1,3 +1,4 @@
+// ssr by express
 import * as express from 'express'
 import * as React from 'react'
 import { StaticRouter } from 'react-router-dom'
