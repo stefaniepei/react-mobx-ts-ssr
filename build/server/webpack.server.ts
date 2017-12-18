@@ -3,6 +3,8 @@ import * as path from 'path'
 import * as nodeExternals from 'webpack-node-externals'
 import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
+import * as autoprefixer from 'autoprefixer'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
 import configs from '../../configs'
@@ -71,29 +73,79 @@ config.module.rules.push({
   exclude: /node_modules/,
 })
 
+// 为打包成单独的css文件而生(webpack3)
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].min.css',
+})
+
 config.module.rules.push({
   test: /\.css$/,
-  use: [
-    { loader: 'css-loader' },
-  ],
+  use: extractSass.extract({
+    use: [{
+      loader: 'css-loader',
+      options: {
+        sourceMap: __DEV__,
+      },
+    }, {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [autoprefixer(
+          {
+            browsers: ['iOS >= 7', 'Android >= 4.1',
+              'last 10 Chrome versions', 'last 10 Firefox versions',
+              'Safari >= 6', 'ie > 8'],
+          },
+        )],
+        sourceMap: __DEV__,
+      },
+    }],
+    // 在开发环境使用 style-loader
+    fallback: 'style-loader',
+  }),
 })
 
 config.module.rules.push({
   test: /\.(scss|sass)$/,
-  use: [
-    { loader: 'css-loader' },
-    { loader: 'sass-loader' },
-  ],
+  use: extractSass.extract({
+    use: [{
+      loader: 'css-loader',
+      options: {
+        sourceMap: __DEV__,
+      },
+    }, {
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [autoprefixer(
+          {
+            browsers: ['iOS >= 7', 'Android >= 4.1',
+              'last 10 Chrome versions', 'last 10 Firefox versions',
+              'Safari >= 6', 'ie > 8'],
+          },
+        )],
+        sourceMap: __DEV__,
+      },
+    }, {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: __DEV__,
+      },
+    }],
+    // 在开发环境使用 style-loader
+    fallback: 'style-loader',
+  }),
 })
 
 config.module.rules.push({
-  test: /\.(png|jpg|gif|svg)$/,
-  use: ['file-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]'],
+  test: /\.(mp4)$/,
+  use: ['url-loader?name=files/[path][name].[ext]'],
 })
-
+config.module.rules.push({
+  test: /\.(png|jpg|jpeg|gif|svg)$/,
+  use: ['url-loader?limit=8192&name=files/[md5:hash:base64:10].[ext]'],
+})
 config.module.rules.push({
   test: /\.(eot|ttf|otf|woff|woff2)$/,
-  use: ['file-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]'],
+  use: ['url-loader?limit=10000&name=files/[md5:hash:base64:10].[ext]'],
 })
 
 config.plugins.push(
@@ -104,16 +156,14 @@ config.plugins.push(
   new ForkTsCheckerWebpackPlugin({
     checkSyntacticErrors: true,
   }),
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-  }),
+  extractSass,
+  // new webpack.ProvidePlugin({
+  //   $: 'jquery',
+  //   jQuery: 'jquery',
+  // }),
 )
 if (__PROD__) {
   config.plugins.push(
-    // new ExtractTextPlugin({
-    //     filename: 'styles.css'
-    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),

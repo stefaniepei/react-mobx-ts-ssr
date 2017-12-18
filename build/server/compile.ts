@@ -56,6 +56,7 @@ const webpackCompiler = (config: any, statsFormat?: any) => {
     fs.copySync(
       configs.assetsDir, configs.outDir
     )
+    debug('Compiler Success !!!')
   } catch (e) {
     debug('Compiler encountered an error.', e)
     process.exit(1)

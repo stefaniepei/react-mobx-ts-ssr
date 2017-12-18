@@ -6,7 +6,7 @@ const debug = _debug('app:server:webpack-dev')
 import configs from '../../../configs'
 
 export default (compiler: any, publicPath: any) => {
-  debug('Enable webpack dev middleware.');
+  debug('Enable webpack dev middleware.')
 
   const middleware = WebpackDevMiddleware(compiler, {
     publicPath,
@@ -15,15 +15,15 @@ export default (compiler: any, publicPath: any) => {
     quiet: false,
     noInfo: false,
     lazy: false,
-    stats: false
+    stats: false,
   })
 
-  return async (ctx: any, next: any) => {
+  return async(ctx: any, next: any) => {
     let hasNext = await applyExpressMiddleware(middleware, ctx.req, {
       end: (content: any) => (ctx.body = content),
-      setHeader: function () {
+      setHeader: function() {
         ctx.set.apply(ctx, arguments)
-      }
+      },
     })
 
     if (hasNext) {
@@ -32,15 +32,15 @@ export default (compiler: any, publicPath: any) => {
   }
 }
 
-function applyExpressMiddleware (fn: any, req: any, res: any) {
-  const originalEnd = res.end;
+function applyExpressMiddleware(fn: any, req: any, res: any) {
+  const originalEnd = res.end
 
   return new Promise((resolve: any) => {
-    res.end = function () {
-      originalEnd.apply(this, arguments);
+    res.end = function() {
+      originalEnd.apply(this, arguments)
       resolve(false)
-    };
-    fn(req, res, function () {
+    }
+    fn(req, res, function() {
       resolve(true)
     })
   })

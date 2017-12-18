@@ -5,8 +5,9 @@ import DevTools from 'mobx-react-devtools'
 // 公用部分css
 const __SSR__ = process.env.RENDER_TYPE === 'server'
 if (!__SSR__) {
-  require('antd/dist/antd.min.css')
-  // require('../public/styles/core.scss')
+  // require('antd/dist/antd.min.css') 可以不要，以后再试试
+  require('normalize.css')
+  require('../public/styles/core.scss')
   require('../public/styles/common.scss')
 }
 

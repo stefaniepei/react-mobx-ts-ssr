@@ -22,9 +22,11 @@ function Routers({
         <Switch>
           {
             routes.map(route => (
-              <Route
-                key={route.path}
-                {...route}
+              <Route key={route.path}
+                path={route.path}
+                exact={route.exact}
+                strict={true}
+                render={(props) => route.noHead ? <div><route.component {...props} /></div> : <div><Header /><route.component {...props} /><Footer /></div>}
               />
             ))
           }
