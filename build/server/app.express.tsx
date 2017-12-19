@@ -17,7 +17,7 @@ app.use(middleware.compression)
 app.set('view engine', 'ejs')
 app.set('views', 'src')
 
-// app.use(express.static('public'))
+// app.use(express.static('assets'))
 app.use(express.static('dist'))
 app.use('/favicon.ico', express.static(__dirname + '../../favicon.ico'))
 

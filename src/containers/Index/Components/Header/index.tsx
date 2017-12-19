@@ -15,39 +15,23 @@ import './Header.scss'
 const header = {
   navs: {
     zh_CN: [
-      // {
-      //   name: '首页',
-      //   to: '/',
-      // },
-      // {
-      //   name: '新闻',
-      //   to: '/news',
-      // },
-      // {
-      //   name: '发行',
-      //   to: '/publish',
-      // },
       {
-        name: '孵化',
-        to: '/incubator',
+        name: '首页',
+        to: '/',
+      },
+      {
+        name: '登录',
+        to: '/login',
       },
     ],
     en_US: [
-      // {
-      //   name: 'Home',
-      //   to: '/',
-      // },
-      // {
-      //   name: 'New',
-      //   to: '/news',
-      // },
-      // {
-      //   name: 'Publish',
-      //   to: '/publish',
-      // },
       {
-        name: 'Incubator',
-        to: '/incubator',
+        name: 'Home',
+        to: '/',
+      },
+      {
+        name: 'Login',
+        to: '/login',
       },
     ],
   },
@@ -63,12 +47,12 @@ const header = {
   },
   images: {
     zh_CN: {
-      // webSrc: require('../../../../public/img/web_logo.png'),
-      // phoneSrc: require('../../../../public/img/m_logo.png'),
+      // webSrc: require('../../../../assets/img/web_logo.png'),
+      // phoneSrc: require('../../../../assets/img/m_logo.png'),
     },
     en_US: {
-      // webSrc: require('../../../../public/img/web_logo_en.png'),
-      // phoneSrc: require('../../../../public/img/m_logo_en.png'),
+      // webSrc: require('../../../../assets/img/web_logo_en.png'),
+      // phoneSrc: require('../../../../assets/img/m_logo_en.png'),
     },
   },
 }

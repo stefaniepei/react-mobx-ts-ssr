@@ -35,6 +35,6 @@ if (__DEV__) {
 // these files. This middleware doesn't need to be enabled outside
 // of development since this directory will be copied into ~/dist
 // when the application is compiled.
-app.use(convert(KoaStatic(path.join(__dirname, '..', '..', 'public'))))
+app.use(convert(KoaStatic(path.join(__dirname, '..', '..', 'assets'))))
 
 export default app

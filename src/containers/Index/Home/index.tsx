@@ -42,13 +42,6 @@ class Home extends React.Component<props, any> {
         </div>
         <Button onClick={add} type='primary'>+1</Button>
         <Button onClick={this.addTest} type='danger'>Test</Button>
-        <div style={{ paddingTop: '20px', background: '#fff' }}>
-          <ul>
-            <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/incubator'>Incubator</Link></li>
-
-          </ul>
-        </div>
       </div>
     )
   }

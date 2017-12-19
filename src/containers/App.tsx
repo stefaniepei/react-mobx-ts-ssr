@@ -7,8 +7,8 @@ const __SSR__ = process.env.RENDER_TYPE === 'server'
 if (!__SSR__) {
   // require('antd/dist/antd.min.css') 可以不要，以后再试试
   require('normalize.css')
-  require('../public/styles/core.scss')
-  require('../public/styles/common.scss')
+  require('../assets/styles/core.scss')
+  require('../assets/styles/common.scss')
 }
 
 // home组件里面的一些路由
