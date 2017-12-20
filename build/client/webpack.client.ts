@@ -5,6 +5,7 @@ import * as ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-we
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as autoprefixer from 'autoprefixer'
+import * as OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import { CheckerPlugin } from 'awesome-typescript-loader'
 
 import configs from '../../configs'
@@ -28,9 +29,10 @@ const config = {
       'babel-polyfill',
       inRootSrc('src/Render.tsx'),
     ],
+    vendor: configs.compilerVendor,
   },
   output: {
-    filename: 'client.bundle.js',
+    filename: '[name].bundle.js',
     path: inRootSrc('dist'),
     publicPath: configs.compilerPublicPath,
   },
@@ -156,6 +158,10 @@ config.plugins.push(
     checkSyntacticErrors: true,
   }),
   extractSass,
+  new webpack.optimize.CommonsChunkPlugin({
+    names: ['vendor', 'manifest'],
+  }),
+  new webpack.BannerPlugin(`Version: ${configs.version}; build: ${new Date().toString()}`),
   // new webpack.ProvidePlugin({
   //   $: 'jquery',
   //   jQuery: 'jquery',
@@ -175,11 +181,13 @@ if (__DEV__) {
     new HtmlWebpackPlugin({
       template: inRootSrc('src/index.html'),
       favicon: inRootSrc('favicon.ico'),
-      hash: false,
+      hash: true,
       inject: true,
       manify: {
-        collapseWhitespace: true,
+        removeComments: true,
+        collapseWhitespace: false,
       },
+      chunks: ['main', 'vendor', 'manifest'],
     }),
   )
 }
@@ -188,6 +196,13 @@ if (__PROD__) {
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
+    }),
+    // css去重加优化
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true,
     }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
