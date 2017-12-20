@@ -29,6 +29,7 @@ const config = {
   },
   entry: {
     main: [
+      'babel-polyfill',
       inRootSrc('build/server/index.ts'),
     ],
     // vendor: configs.compilerVendor

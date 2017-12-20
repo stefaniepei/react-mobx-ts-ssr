@@ -12,6 +12,7 @@ export default {
   assetsDir: path.join(__dirname, '../src/assets/static'),
   port: process.env.PORT || 4000,
   compilerVendor: [
+    'core-js',
     'react',
     'react-dom',
     'react-router-dom',

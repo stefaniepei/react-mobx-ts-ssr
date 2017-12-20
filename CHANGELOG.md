@@ -1,5 +1,8 @@
 # 更新日志
 
+## 1.0.3 兼容ie9
+增加core-js 让react V16支持IE9,IE10
+
 ## 1.0.2 加快加载速度
 client.bundle.js打包拆分[manifest][vendor][main].bundle.js
 

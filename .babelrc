@@ -1,15 +1,24 @@
 {
   "presets": [
-    "env","react"
+    "env",
+    "react"
   ],
   "plugins": [
-    ["transform-runtime", {
-      "helpers": true,
-      "polyfill": false,
-      "regenerator": true,
-      "moduleName": "babel-runtime"
-    }],
-    ["antd", { "style": true }],
+    [
+      "transform-runtime",
+      {
+        "helpers": true,
+        "polyfill": true,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }
+    ],
+    [
+      "antd",
+      {
+        "style": true
+      }
+    ],
     "transform-decorators-legacy",
     "babel-plugin-transform-object-assign"
   ]
