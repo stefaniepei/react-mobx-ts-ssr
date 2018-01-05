@@ -3,7 +3,7 @@ import * as path from 'path'
 
 export default {
   // base configuration
-  version: '1.0.2',
+  version: '1.0.3',
   env: process.env.NODE_ENV || 'development',
   render: process.env.RENDER_TYPE || 'client',
   pathBase: path.join(__dirname, '..'),
@@ -16,6 +16,7 @@ export default {
     'react',
     'react-dom',
     'react-router-dom',
+    'react-loadable',
     'antd',
     'axios',
     'history',

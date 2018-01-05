@@ -12,7 +12,7 @@ if (!__SSR__) {
 }
 
 // home组件里面的一些路由
-import IndexRouters from '../containers/Index/router'
+import IndexRouters from '../containers/router'
 
 // 统一路由方法
 import Routers from '../routers/routers'

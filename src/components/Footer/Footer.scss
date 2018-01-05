@@ -1,0 +1,158 @@
+.index-footer {
+    .container-wrap {
+        background: #D8D8D8;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0 auto;
+        padding: 25px 0 30px 0;
+        max-width: 1297px;
+        color: #000;
+        .item-center {
+            align-self: center;
+            .img-text {
+                display: flex;
+                align-items: center;
+                border: 1px solid #fff;
+                &:nth-child(1) {
+                    margin-bottom: 10px;
+                }
+                .text {
+                    margin-bottom: 0;
+                    width: 193px;
+                    text-align: center;
+                    color: #3c3c3c;
+                }
+            }
+        }
+        .item {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 124px;
+            .title {
+                margin-bottom: 10px;
+                font-size: 20px;
+            }
+            .sub-item {
+                color: #3c3c3c;
+                &:hover {
+                    color: #EBA233;
+                }
+            }
+        }
+        .contact-way {
+            position: absolute;
+            bottom: 0;
+            width: 150px;
+            .icon {
+                display: inline-block;
+                font-size: 35px;
+                &:not(:last-of-type) {
+                    margin-right: 10px;
+                }
+                &:hover::before {
+                    color: rgb(235, 162, 51);
+                }
+                &.active::before {
+                    color: rgb(235, 162, 51);
+                }
+            }
+            .wechat {
+                display: none;
+                position: absolute;
+                top: -150px;
+                left: calc(-50% + 32px);
+                padding: 8px;
+                background: #fff;
+                border-radius: 8px;
+                &:after {
+                    content: ' ';
+                    border: 1px solid transparent;
+                    height: 0;
+                    top: 100%;
+                    position: absolute;
+                    width: 0;
+                    border-width: 10px;
+                    border-top-color: #fff;
+                    left: calc(50% - 18px);
+                }
+                &.weibo {
+                    left: calc(-50% + 24px + 54px);
+                }
+                &.show {
+                    display: block;
+                }
+            }
+        }
+    }
+    .footer {
+        background: #3c3c3c;
+        font-size: 14px;
+        color: #D8D8D8;
+        padding: 14px 0;
+        text-align: center;
+        span:not(:last-of-type) {
+            margin-right: 10px;
+        }
+        a {
+            color: #D8D8D8;
+        }
+        .disn {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 948px) {
+    .index-footer {
+        .container {
+            position: relative;
+            padding: 25px 5% 30px 5%;
+            justify-content: space-between;
+            .item-center:nth-child(1) {
+                display: none;
+            }
+            .item-center {
+                align-self: flex-start;
+                .img-text {
+                    .text {
+                        display: none;
+                    }
+                }
+            }
+            .item {
+                height: 145px;
+                .title {
+                    font-size: 3.2rem;
+                }
+                .sub-item {
+                    font-size: 2.6rem;
+                    color: #3c3c3c;
+                }
+                .contact-way {
+                    right: 0;
+                    text-align: right;
+                    bottom: 22px;
+                }
+                .wechat {
+                  left: calc(-50% + 24px + 32px);
+                  &.weibo{
+                    left: calc(-50% + 24px + 78px);
+                  }
+                }
+            }
+        }
+        .footer {
+            font-size: 1.8rem;
+            span {
+                text-align: center;
+                display: inline-block;
+                width: 70%;
+                vertical-align: top;
+            }
+        }
+    }
+}

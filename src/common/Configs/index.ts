@@ -2,9 +2,9 @@ import configs from '../../../configs'
 export enum LOCALE { zh_CN, en_US }
 
 const Host = {
-  'production': 'http://172.16.0.240:9001/v1', // 目前是乱填的
-  'qa': 'http://172.16.51.117:9001/v1', // 目前是liwei的电脑
-  'development': 'http://172.16.51.117:9001/v1', // 目前是前端的测试服务器
+  'production': 'http://xxx/v1', // 正式环境服务器
+  'qa': 'http://xxx/v1', // qa服务器
+  'development': 'http://xxx/v1', // 测试服务器
 }
 
 class Configs {

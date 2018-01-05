@@ -19,7 +19,7 @@ export default (compiler: any, publicPath: any) => {
   })
 
   return async(ctx: any, next: any) => {
-    let hasNext = await applyExpressMiddleware(middleware, ctx.req, {
+    let hasNext = await applyServiceMiddleware(middleware, ctx.req, {
       end: (content: any) => (ctx.body = content),
       setHeader: function() {
         ctx.set.apply(ctx, arguments)
@@ -32,7 +32,7 @@ export default (compiler: any, publicPath: any) => {
   }
 }
 
-function applyExpressMiddleware(fn: any, req: any, res: any) {
+function applyServiceMiddleware(fn: any, req: any, res: any) {
   const originalEnd = res.end
 
   return new Promise((resolve: any) => {

@@ -1,6 +1,10 @@
 import { observable, action, runInAction } from 'mobx'
 import * as Cookies from 'universal-cookie'
 import i18n from '../../common/i18n'
+import { userLogin, userLogoutToken } from './api'
+import _debug from 'debug'
+
+const debug = _debug('app:AdminStore')
 const cookies = new Cookies()
 
 export default class Base {
@@ -11,6 +15,22 @@ export default class Base {
   @observable isScroll0 = true
   @observable languageSetter = false
   @observable erwei = ''
+
+  @observable userInfo = cookies.get('userInfo') || {}  //用户信息详情
+  @observable loading = false // 正在加载中...防止重复加载
+
+  // 赋值
+  @action('AdminStore :: setStore')
+  setStore(key: any, val: any) {
+    this[key] = val
+  }
+
+  // 赋值
+  @action('AdminStore :: setStore')
+  setStoreCookie(key: any, val: any) {
+    this[key] = val
+    cookies.set(key, val, { path: '/' })
+  }
 
   @action('Base :: addCount1')
   add = () => {
@@ -63,6 +83,27 @@ export default class Base {
 
   @action setI18nData = () => {
     this.i18n = i18n.instance.get(this.locale)
+  }
+
+  //  登录
+  @action('Admin :: async userLogin')
+  userLogin = async(params) => {
+    try {
+      await userLogin(params)
+      // ....
+    } catch (e) {
+      debug('[StoreError:async userLogin]', e)
+    }
+  }
+
+  //  登出
+  @action('Admin :: async userLogout')
+  userLogout = async(params) => {
+    try {
+      await userLogoutToken(params)
+    } catch (e) {
+      debug('[StoreError:async userLogout]', e)
+    }
   }
 
 }

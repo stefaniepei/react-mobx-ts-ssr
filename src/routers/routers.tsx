@@ -1,8 +1,8 @@
 import * as React from 'react'
 import configs from '../../configs'
 // 公用组件
-import Header from '../containers/Index/Components/Header'
-import Footer from '../containers/Index/Components/Footer'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 
 import {
   BrowserRouter,

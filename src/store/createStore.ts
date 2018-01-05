@@ -1,7 +1,7 @@
 import { RouterStore } from 'mobx-react-router'
 
 import Base from './Base'
-import Inncubator from './Index/Incubator'
+import Inncubator from './Incubator'
 
 const appStores = {
   RouterStore,
