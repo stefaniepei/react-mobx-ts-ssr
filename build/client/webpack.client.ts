@@ -190,9 +190,7 @@ if (__DEV__) {
       chunks: ['main', 'vendor', 'manifest'],
     }),
   )
-}
-
-if (__PROD__) {
+} else {
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -211,7 +209,6 @@ if (__PROD__) {
       compress: {         // compress
         unused: true,
         dead_code: true,
-        screw_ie8: false,
         warnings: false,
       },
       sourceMap: false,

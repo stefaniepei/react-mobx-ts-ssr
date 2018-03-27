@@ -9,6 +9,7 @@ export const TIMEOUT = 15000
 export const ALL_PERMISSION = 1
 export const PART_PERMISSION = 0
 
+// antd-3.1.3 fixed zh_CN can remove
 export const zh_CN = {
   Pagination: {
     items_per_page: '条/页',

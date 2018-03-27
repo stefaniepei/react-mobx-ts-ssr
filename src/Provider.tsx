@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
-import { useStrict } from 'mobx'
+// import { useStrict } from 'mobx'
+// import { LocaleProvider } from 'antd'
+// import zhCN from 'antd/lib/locale-provider/zh_CN'
 import { Provider as MobxProvider } from 'mobx-react'
 import { syncHistoryWithStore, RouterStore } from 'mobx-react-router'
 import createMemoryHistory from 'history/createMemoryHistory'
@@ -8,7 +10,7 @@ import createMemoryHistory from 'history/createMemoryHistory'
 import createStore from './store/createStore'
 import App from './containers/App'
 
-useStrict(true) // MobX strict mode
+// useStrict(true) // MobX strict mode
 
 const memoryHistory = createMemoryHistory()
 const routingStore = new RouterStore()
@@ -18,13 +20,15 @@ export const stores = createStore()
 export const history = syncHistoryWithStore(
   memoryHistory,
   routingStore,
-  ...stores,
+  // ...stores,
 )
 
 export default function Provider() {
   return (
     <MobxProvider {...stores}>
+      {/* <LocaleProvider locale={zhCN}> */}
       <App history={history} />
+      {/* </LocaleProvider> */}
     </MobxProvider>
   )
 }

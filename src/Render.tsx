@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-
 import configs from '../configs'
 import Provider from './Provider'
 
@@ -18,7 +17,9 @@ const render = (Component) => {
 
 render(Provider)
 
-if ((module as any).hot && configs.render !== 'server') {
+const __DEV__ = configs.env === 'development'
+
+if (__DEV__ && (module as any).hot) {
   (module as any).hot.accept('./Provider.tsx', () => {
     const containers = require('./Provider.tsx').default
     render(containers)

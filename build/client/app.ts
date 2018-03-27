@@ -10,18 +10,14 @@ import configs from '../../configs'
 import webpackDevMiddleware from './middleware/webpack-dev'
 import webpackHMRMiddleware from './middleware/webpack-hmr'
 import webpackConfig from './webpack.client'
-// import compressHandlerMiddleware from './middleware/compress-handler'
 
 const debug = _debug('app:server')
 const app = new Koa()
-const __DEV__ = process.env.NODE_ENV === 'development'
-
-// app.use(compressHandlerMiddleware.register(true))
+const __DEV__ = configs.env === 'development'
 
 app.use(convert(historyApiFallback({
   verbose: false,
 })))
-
 
 if (__DEV__) {
   // Enable webpack-dev and webpack-hot middleware

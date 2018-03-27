@@ -147,7 +147,7 @@ class Footer extends React.Component<any, any> {
     return (
       <div className='index-footer'>
         <div className='footer'>
-          <span className='left'>Copyright ©2017 Stefaniepei. All Rights Reserved.</span>
+          <span className='left'>Copyright ©2018 Stefaniepei. All Rights Reserved.</span>
           <span>{footer.text[locale].copyright}</span>
           <span className={locale === 'zh_CN' ? '' : 'disn'}></span>
         </div>
