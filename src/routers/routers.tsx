@@ -26,7 +26,7 @@ function Routers({
                 path={route.path}
                 exact={route.exact}
                 strict={true}
-                render={(props) => route.noHead ? <div><route.component {...props} /></div> : <div><Header /><route.component {...props} /><Footer /></div>}
+                render={(props) => route.noHead ? <div><route.component {...props} /></div> : <div><Header {...children} /><route.component {...props} /><Footer /></div>}
               />
             ))
           }
@@ -44,7 +44,7 @@ function Routers({
                   path={route.path}
                   exact={route.exact}
                   strict={true}
-                  render={(props) => route.noHead ? <div><route.component {...props} /></div> : <div><Header /><route.component {...props} /><Footer /></div>}
+                  render={(props) => route.noHead ? <div><route.component {...props} /></div> : <div><Header {...children} /><route.component {...props} /><Footer /></div>}
                 />
               ))
             }

@@ -11,29 +11,14 @@ module.exports = (function () {
           NODE_ENV: 'development', // 环境变量
           PORT: 8010, // 端口号请直接在前端配置
         },
-        env_production: { // 其他环境的名称跟在“env_”之后
-          NODE_ENV: 'production'
-        },
         env_qa: {
           NODE_ENV: 'qa',
           PORT: 3333,
         },
+        env_production: { // 其他环境的名称跟在“env_”之后
+          NODE_ENV: 'production'
+        },
       },
     ],
-    deploy: { // 这里是部署的配置项
-      development: { // 部署时用到的名称
-        user: 'root', // 将要部署的主机的用户
-        host: ['dev-mobx'], // 将要部署的主机的域名或者IP，可以多个
-        repo: 'https://github.com/stefaniepei/react-mobx-ts-ssr.git', // git仓库
-        ref: 'origin/master', // 要使用的分支
-        path: this.path, // 远程主机上的将要部署到的目录
-        // 在setup的时候执行，这里只是在远程主机上建立目录，只在第一次执行
-        'post-setup': `[ ! -d ${this.path}/source/dist ] && mkdir -p ${this.path}/source/dist; [ ! -d ${this.path}/source/backend/logs ] && mkdir -p ${this.path}/source/backend/logs `,
-        // 在本地执行的命令
-        'pre-deploy-local': `scp -r dist/* root@dev-game4us:${this.path}/source/dist`,
-        // 在远程主机执行的命令
-        'post-deploy': `cd ${this.path}/source/backend && npm install && cd .. && pm2 startOrRestart ecosystem.config.js --env development`,
-      },
-    }
   }
 })()
