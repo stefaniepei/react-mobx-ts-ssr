@@ -1,23 +1,22 @@
 import { observable, action, runInAction } from 'mobx'
-import * as Cookies from 'universal-cookie'
 import i18n from '../../common/i18n'
 import { userLogin, userLogoutToken } from './api'
 import _debug from 'debug'
+import BaseStore from '../BaseStore'
 
 const debug = _debug('app:AdminStore')
-const cookies = new Cookies()
 
-export default class Base {
-  @observable count = +cookies.get('count') || 0
-  @observable locale = cookies.get('locale') || 'zh_CN'
-  @observable activePath = cookies.get('activePath') || ''
+
+export default class Base extends BaseStore {
+  @observable count = +this.Storage.getItem('count') || 0
+  @observable locale = this.Storage.getItem('locale') || 'zh_CN'
+  @observable activePath = this.Storage.getItem('activePath') || ''
   @observable i18n = i18n.instance.get(this.locale)
   @observable isScroll0 = true
   @observable languageSetter = false
   @observable erwei = ''
 
-  @observable userInfo = cookies.get('userInfo') || {}  //用户信息详情
-  @observable loading = false // 正在加载中...防止重复加载
+  @observable userInfo = this.Storage.getItem('userInfo') || {}  //用户信息详情
 
   // 赋值
   @action('AdminStore :: setStore')
@@ -29,7 +28,7 @@ export default class Base {
   @action('AdminStore :: setStore')
   setStoreCookie(key: any, val: any) {
     this[key] = val
-    cookies.set(key, val, { path: '/' })
+    this.Storage.setItem(key, val)
   }
 
   @action('Base :: addCount1')
@@ -37,7 +36,7 @@ export default class Base {
     try {
       runInAction('Base :: add new count', () => {
         this.count++
-        cookies.set('count', this.count, { path: '/' })
+        this.Storage.setItem('count', this.count)
       })
     } catch (e) {
       runInAction('Base :: count rejected', () => {
@@ -72,7 +71,7 @@ export default class Base {
   @action('Base :: setLanguage')
   setLanguage = (val: string) => {
     this.locale = val
-    cookies.set('locale', val, { path: '/' })
+    this.Storage.setItem('locale', val)
     this.setI18nData()
   }
 

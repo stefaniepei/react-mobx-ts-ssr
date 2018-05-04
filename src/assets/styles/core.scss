@@ -1,27 +1,29 @@
-/* @import "_font"; */
-
+@import '~normalize.css';
+@import '~hotcss/src/px2rem.scss';
+// @import '~antd/dist/antd.css'; // webpack.client.ts plugin
+// @import 'px2rem';
+// @import "_font";
 :global {
     $skinColor: #108EE9;
-    em {
-        font-style: normal;
+    * {
+        margin: 0;
+        padding: 0;
     }
-    a:hover,
-    a:focus {
+    a {
         text-decoration: none;
     }
-     :focus {
-        outline: none !important;
+    li {
+        list-style: none;
     }
-    .cf {
-        zoom: 1;
-    }
-    .cf:after {
-        visibility: hidden;
+    .clear:after {
         display: block;
-        font-size: 0;
-        content: " ";
         clear: both;
-        height: 0;
+        content: "";
+        visibility: hidden;
+        height: 0
+    }
+    .clear {
+        zoom: 1
     }
     .hide {
         display: none;
@@ -52,19 +54,17 @@
     .content-box * {
         box-sizing: inherit;
     }
-    body {
-        // font-size: 14px;
-        // min-width: 1246px;
-        min-height: 100%;
-        #wrapper {
-            height: 100%;
-        }
-    }
-    .ant-breadcrumb-link {
+    .hand {
         cursor: pointer;
     }
     .error {
-        color: #f04134!important;
+        color: #f04134 !important;
+    }
+    .sucess {
+        color: #20a819;
+    }
+    .disabled {
+        color: #ddd
     }
     .all_warp {
         word-break: break-all;
@@ -77,13 +77,5 @@
     }
     .link-color {
         color: #108EE9;
-    }
-    .myedit-table {
-        td {
-            max-width: 300px;
-            min-width: 50px;
-            word-break: break-all !important;
-            word-wrap: break-word !important;
-        }
     }
 }

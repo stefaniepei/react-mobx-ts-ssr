@@ -1,16 +1,12 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?6q1t5j');
-  src:  url('../fonts/icomoon.eot?6q1t5j#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?6q1t5j') format('truetype'),
-    url('../fonts/icomoon.woff?6q1t5j') format('woff'),
-    url('../fonts/icomoon.svg?6q1t5j#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot?s3w74z ');
+    src: url('../fonts/icomoon.eot?s3w74z #iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?s3w74z ') format('truetype'), url('../fonts/icomoon.woff?s3w74z ') format('woff'), url('../fonts/icomoon.svg?s3w74z #icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
+i {
   font-family: 'icomoon' !important;
   speak: none;
   font-style: normal;
@@ -19,116 +15,37 @@
   text-transform: none;
   line-height: 1;
 
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-icon_bottom_facebook_default:before {
-  content: "\e900";
-  color: #fff;
-}
-.icon-icon_bottom_facebook_selected .path1:before {
+.icon-user-circle:before {
   content: "\e901";
-  color: rgb(235, 162, 51);
 }
-.icon-icon_bottom_facebook_selected .path2:before {
+.icon-link:before {
   content: "\e902";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
+  color: #9d9d9d;
 }
-.icon-icon_bottom_sina_default:before {
-  content: "\e903";
-  color: #fff;
-}
-.icon-icon_bottom_sina_selected .path1:before {
-  content: "\e904";
-  color: rgb(235, 162, 51);
-}
-.icon-icon_bottom_sina_selected .path2:before {
-  content: "\e905";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-icon_bottom_sina_selected .path3:before {
-  content: "\e906";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-icon_bottom_sina_selected .path4:before {
-  content: "\e907";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-icon_bottom_sina_selected .path5:before {
-  content: "\e908";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-icon_bottom_weixin_default:before {
+.icon-user:before {
   content: "\e909";
-  color: #fff;
 }
-.icon-icon_bottom_weixin_selected .path1:before {
-  content: "\e90a";
-  color: rgb(235, 162, 51);
-}
-.icon-icon_bottom_weixin_selected .path2:before {
+.icon-pwd:before {
   content: "\e90b";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
-.icon-icon_bottom_weixin_selected .path3:before {
+.icon-danger:before {
   content: "\e90c";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
-.icon-icon_incubator_middle_finance:before {
+.icon-right:before {
   content: "\e90d";
-  color: #fff;
 }
-.icon-icon_incubator_middle_hr:before {
-  content: "\e90e";
-  color: #fff;
+.icon-facebook:before {
+  content: "\e900";
+  color: #3b5998;
 }
-.icon-icon_incubator_middle_profit:before {
-  content: "\e90f";
-  color: #fff;
+.icon-upload:before {
+  content: "\e961";
 }
-.icon-icon_incubator_middle_studio:before {
-  content: "\e910";
-  color: #fefefe;
+.icon-google:before {
+  content: "\ea89";
 }
-.icon-icon_news_facebook_default:before {
-  content: "\e911";
-}
-.icon-icon_news_instagram_default:before {
-  content: "\e912";
-}
-.icon-icon_news_instagram_selected .path1:before {
-  content: "\e913";
-  color: rgb(235, 162, 51);
-}
-.icon-icon_news_instagram_selected .path2:before {
-  content: "\e914";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-icon_news_sina_default:before {
-  content: "\e915";
-}
-.icon-icon_news_twitter_default:before {
-  content: "\e916";
-}
-.icon-icon_news_twitter_selected .path1:before {
-  content: "\e917";
-  color: rgb(235, 162, 51);
-}
-.icon-icon_news_twitter_selected .path2:before {
-  content: "\e918";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.icon-icon_news_weixin_default:before {
-  content: "\e919";
-}
+

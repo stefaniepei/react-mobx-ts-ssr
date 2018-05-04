@@ -1,7 +1,5 @@
 import axios from '../axios'
-import * as Cookies from 'universal-cookie'
-
-const cookies = new Cookies()
+import Storage from '../../utils/storage'
 
 // 登录
 export function userLogin(params: any) {
@@ -10,6 +8,6 @@ export function userLogin(params: any) {
 
 // 登出 token
 export function userLogoutToken(params: any) {
-  return axios.post('/login/logout', params, { headers: { 'Authorization': 'Bearer ' + cookies.get('userToken') } })
+  return axios.post('/login/logout', params, { headers: { 'Authorization': 'Bearer ' + Storage.getItem('userToken') } })
 }
 

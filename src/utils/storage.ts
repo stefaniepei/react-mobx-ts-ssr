@@ -1,14 +1,17 @@
 import Utils from '../utils'
+import * as Cookies from 'universal-cookie'
 import _debug from 'debug'
-const debug = _debug('app:Admin:MessageManagement')
+const debug = _debug('app:storage')
+const cookies = new Cookies()
 
 const Storage = {
   getItem(key: any) {
     let value
     try {
-      value = localStorage.getItem(key)
+      // value = localStorage.getItem(key)
+      value = cookies.get(key)
     } catch (ex) {
-      debug('localStorage.getItem报错, ', ex.message)
+      debug('Storage.getItem报错, ', ex.message)
     } finally {
       return value
     }
@@ -16,13 +19,15 @@ const Storage = {
   setItem(key: any, val: any) {
     try {
       // ios safari 无痕模式下，直接使用 localStorage.setItem 会报错
-      localStorage.setItem(key, val)
+      // localStorage.setItem(key, val)
+      cookies.set(key, val, { path: '/' })
     } catch (ex) {
       debug('localStorage.setItem报错, ', ex.message)
     }
   },
   removeItem(key: any) {
-    return localStorage.removeItem(key)
+    cookies.remove(key)
+    // return localStorage.removeItem(key)
   },
 
   // Basic Data Type for zlib
