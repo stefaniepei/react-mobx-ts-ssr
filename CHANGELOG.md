@@ -1,5 +1,10 @@
 # 更新日志
 
+## 1.0.6 
+braft-editor html->raw
+package包更新 2018/05/04
+awesome-typescript-loader,webpack,@types/webpack,webpack-dev-middleware,optimize-css-assets-webpack-plugin不可更新
+
 ## 1.0.5 
 更新并修复braft-editor到1.8.3
 assetsDir 拷贝目录至dist

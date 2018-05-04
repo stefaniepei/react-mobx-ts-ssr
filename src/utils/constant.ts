@@ -1,7 +1,10 @@
 // 通用常量
+export const ENABLED = 1
+export const DISABLED = 2
 
 // 接口返回成功值
 export const API_SUCESS = 1
+export const NEW_API_SUCESS = 0
 export const UNAUTHORIZED = 401
 export const TIMEOUT = 15000
 
@@ -9,51 +12,14 @@ export const TIMEOUT = 15000
 export const ALL_PERMISSION = 1
 export const PART_PERMISSION = 0
 
-// antd-3.1.3 fixed zh_CN can remove
-export const zh_CN = {
-  Pagination: {
-    items_per_page: '条/页',
-    jump_to: '跳至',
-    jump_to_confirm: '确定',
-    page: '页',
-    prev_page: '上一页',
-    next_page: '下一页',
-    prev_5: '向前 5 页',
-    next_5: '向后 5 页',
-    prev_3: '向前 3 页',
-    next_3: '向后 3 页',
-  },
-  Table: {
-    filterTitle: '筛选',
-    filterConfirm: '确定',
-    filterReset: '重置',
-    emptyText: '暂无数据',
-    selectAll: '全选当页',
-    selectInvert: '反选当页',
-  },
-  Modal: {
-    okText: '确定',
-    cancelText: '取消',
-    justOkText: '知道了',
-  },
-  Popconfirm: {
-    cancelText: '取消',
-    okText: '确定',
-  },
-  Transfer: {
-    notFoundContent: '无匹配结果',
-    searchPlaceholder: '请输入搜索内容',
-    itemUnit: '项',
-    itemsUnit: '项',
-  },
-  Select: {
-    notFoundContent: '无匹配结果',
-  },
-  Upload: {
-    uploading: '文件上传中',
-    removeFile: '删除文件',
-    uploadError: '上传错误',
-    previewFile: '预览文件',
-  },
-}
-
+//语言列表
+export const languageList = [
+  { label: '英文(默认)', value: 1, disabled: true },
+  { label: '中文', value: 2 },
+  { label: '日语', value: 3 },
+  { label: '法语', value: 4 },
+  { label: '俄语', value: 5 },
+  { label: '阿拉伯语', value: 6 },
+  { label: '德语', value: 7 },
+  { label: '印度语', value: 8 },
+]

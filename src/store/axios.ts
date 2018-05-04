@@ -4,7 +4,7 @@ import _debug from 'debug'
 import { message } from 'antd'
 import { UNAUTHORIZED, TIMEOUT } from '../utils/constant'
 import Configs from '../common/Configs'
-import ErrorCode from '../utils/dict'
+import ErrorCode from '../utils/errorCode'
 
 const debug = _debug('promise:Axios')
 const history = createMemoryHistory()
